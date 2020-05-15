@@ -10,10 +10,10 @@
   <svg
     class="gantt-elastic__chart-row-text-wrapper"
     :style="{ ...root.style['chart-row-text-wrapper'] }"
-    :x="task.x + task.width + root.state.options.chart.text.offset"
-    :y="task.y - root.state.options.chart.grid.horizontal.gap"
-    :width="getWidth"
-    :height="getHeight"
+    :x="(isNaN(task.x + task.width + root.state.options.chart.text.offset) ? 0 : (task.x + task.width + root.state.options.chart.text.offset))"
+    :y="(isNaN(task.y - root.state.options.chart.grid.horizontal.gap) ? 0 : (task.y - root.state.options.chart.grid.horizontal.gap))"
+    :width="(isNaN(getWidth) ? 0 : getWidth)"
+    :height="(isNaN(getHeight) ? 0 : getHeight)"
   >
     <foreignObject x="0" y="0" width="100%" :height="getHeight">
       <div

@@ -17,9 +17,9 @@
       class="gantt-elastic__chart-days-highlight-rect"
       v-for="day in workingDays"
       :key="getKey(day)"
-      :x="day.offset.px"
+      :x="(isNaN(day.offset.px) ? 0 : day.offset.px)"
       y="0"
-      :width="day.width.px"
+      :width="(isNaN(day.width.px) ? 0 : day.width.px)"
       height="100%"
       :style="{ ...root.style['chart-days-highlight-rect'] }"
     ></rect>

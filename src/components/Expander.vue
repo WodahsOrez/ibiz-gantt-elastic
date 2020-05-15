@@ -11,18 +11,18 @@
     <svg
       :class="getClassPrefix() + '-content'"
       :style="{ ...root.style[getClassPrefix(false) + '-content'] }"
-      :width="options.size"
-      :height="options.size"
+      :width="(isNaN(options.size) ? 0 : options.size)"
+      :height="(isNaN(options.size) ? 0 : options.size)"
       v-if="allChildren.length"
       @click="toggle"
     >
       <rect
         :class="getClassPrefix() + '-border'"
         :style="{ ...root.style[getClassPrefix(false) + '-border'], ...borderStyle }"
-        :x="border"
-        :y="border"
-        :width="options.size - border * 2"
-        :height="options.size - border * 2"
+        :x="(isNaN(border) ? 0 : border)"
+        :y="(isNaN(border) ? 0 : border)"
+        :width="(isNaN(options.size - border * 2) ? 0 : options.size - border * 2)"
+        :height="(isNaN(options.size - border * 2) ? 0 : options.size - border * 2)"
         rx="2"
         ry="2"
       ></rect>
@@ -30,19 +30,19 @@
         :class="getClassPrefix() + '-line'"
         :style="{ ...root.style[getClassPrefix(false) + '-line'] }"
         v-if="allChildren.length"
-        :x1="lineOffset"
-        :y1="options.size / 2"
-        :x2="options.size - lineOffset"
-        :y2="options.size / 2"
+        :x1="(isNaN(lineOffset) ? 0 : lineOffset)"
+        :y1="(isNaN(options.size / 2) ? 0 : options.size / 2)"
+        :x2="(isNaN(options.size - lineOffset) ? 0 : options.size - lineOffset)"
+        :y2="(isNaN(options.size / 2) ? 0 : options.size / 2)"
       ></line>
       <line
         :class="getClassPrefix() + '-line'"
         :style="{ ...root.style[getClassPrefix(false) + '-line'] }"
         v-if="collapsed"
-        :x1="options.size / 2"
-        :y1="lineOffset"
-        :x2="options.size / 2"
-        :y2="options.size - lineOffset"
+        :x1="(isNaN(options.size / 2) ? 0 : options.size / 2)"
+        :y1="(isNaN(lineOffset) ? 0 : lineOffset)"
+        :x2="(isNaN(options.size / 2) ? 0 : options.size / 2)"
+        :y2="(isNaN(options.size - lineOffset) ? 0 : options.size - lineOffset)"
       ></line>
     </svg>
   </div>

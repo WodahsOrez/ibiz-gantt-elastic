@@ -25,7 +25,7 @@
           x1="0"
           y1="0"
           x2="0"
-          :y2="root.state.options.chart.progress.width"
+          :y2="(isNaN(root.state.options.chart.progress.width) ? 0 : root.state.options.chart.progress.width)"
         />
       </pattern>
     </defs>
@@ -35,15 +35,15 @@
       :style="{ ...root.style['chart-row-progress-bar-solid'], ...task.style['chart-row-progress-bar-solid'] }"
       x="0"
       y="0"
-      :width="getProgressWidth"
+      :width="(isNaN(getProgressWidth) ? 0 : getProgressWidth)"
     ></rect>
     <g v-if="root.state.options.chart.progress.pattern">
       <rect
         class="gantt-elastic__chart-row-progress-bar-pattern"
         :style="{ ...root.style['chart-row-progress-bar-pattern'], ...task.style['chart-row-progress-bar-pattern'] }"
-        :x="getProgressWidth"
+        :x="(isNaN(getProgressWidth) ? 0 : getProgressWidth)"
         y="0"
-        :width="100 - task.progress + '%'"
+        :width="(isNaN(100 - task.progress + '%') ? 0 : 100 - task.progress + '%')"
         height="100%"
       ></rect>
       <path

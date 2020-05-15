@@ -13,8 +13,8 @@
     ref="chart"
     x="0"
     y="0"
-    :width="root.state.options.width"
-    :height="root.state.options.allVisibleTasksHeight"
+    :width="(isNaN(root.state.options.width) ? 0 : root.state.options.width)"
+    :height="(isNaN(root.state.options.allVisibleTasksHeight) ? 0 : root.state.options.allVisibleTasksHeight)"
     xmlns="http://www.w3.org/2000/svg"
   >
     <g class="gantt-elastic__grid-lines" :style="{ ...root.style['grid-lines'] }">
@@ -23,28 +23,28 @@
         :style="{ ...root.style['grid-line-horizontal'] }"
         v-for="line in horizontalLines"
         :key="line.key"
-        :x1="line.x1"
-        :y1="line.y1"
-        :x2="line.x2"
-        :y2="line.y2"
+        :x1="(isNaN(line.x1) ? 0 : line.x1)"
+        :y1="(isNaN(line.y1) ? 0 : line.y1)"
+        :x2="(isNaN(line.x2) ? 0 : line.x2)"
+        :y2="(isNaN(line.y2) ? 0 : line.y2)"
       ></line>
       <line
         class="gantt-elastic__grid-line-vertical"
         :style="{ ...root.style['grid-line-vertical'] }"
         v-for="line in verticalLines"
         :key="line.key"
-        :x1="line.x1"
-        :y1="line.y1"
-        :x2="line.x2"
-        :y2="line.y2"
+        :x1="(isNaN(line.x1) ? 0 : line.x1)"
+        :y1="(isNaN(line.y1) ? 0 : line.y1)"
+        :x2="(isNaN(line.x2) ? 0 : line.x2)"
+        :y2="(isNaN(line.y2) ? 0 : line.y2)"
       ></line>
       <line
         class="gantt-elastic__grid-line-time"
         :style="{ ...root.style['grid-line-time'] }"
-        :x1="timeLinePosition.x"
-        :y1="timeLinePosition.y1"
-        :x2="timeLinePosition.x"
-        :y2="timeLinePosition.y2"
+        :x1="(isNaN(timeLinePosition.x) ? 0 : timeLinePosition.x)"
+        :y1="(isNaN(timeLinePosition.y1) ? 0 : timeLinePosition.y1)"
+        :x2="(isNaN(timeLinePosition.x) ? 0 : timeLinePosition.x)"
+        :y2="(isNaN(timeLinePosition.y2) ? 0 : timeLinePosition.y2)"
       ></line>
     </g>
   </svg>

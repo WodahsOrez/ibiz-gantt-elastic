@@ -1,6 +1,6 @@
 {
-  "name": "gantt-elastic",
-  "version": "1.0.11",
+  "name": "ibiz-gantt-elastic",
+  "version": "1.0.0",
   "description": "Gantt chart. Elastic javascript gantt chart. Vue gantt. Project manager responsive gantt. jquery gantt.",
   "main": "src/GanttElastic.vue",
   "dependencies": {
@@ -28,7 +28,7 @@
     "vue-template-compiler": "^2.6.10",
     "webpack": "^4.39.3",
     "webpack-cli": "^3.3.8",
-    "webpack-dev-server": "^3.8.0"
+    "webpack-dev-server": "^3.11.0"
   },
   "scripts": {
     "test": "npx cypress run --browser chrome",
