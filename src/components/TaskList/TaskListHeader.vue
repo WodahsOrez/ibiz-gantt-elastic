@@ -24,6 +24,7 @@
       }"
       v-for="column in root.getTaskListColumns"
       :key="column._id"
+       v-if="!column.hidden"
     >
       <task-list-expander
         v-if="column.expander"

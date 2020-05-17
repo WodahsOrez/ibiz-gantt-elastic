@@ -1095,7 +1095,7 @@ exports = module.exports = __webpack_require__(7)(false);
 
 
 // module
-exports.push([module.i, "\n[class^='gantt-elastic'],\n[class*=' gantt-elastic'] {\n  box-sizing: border-box;\n}\n.gantt-elastic__main-view svg {\n  display: block;\n}\n.gantt-elastic__grid-horizontal-line,\n.gantt-elastic__grid-vertical-line {\n  stroke: #a0a0a0;\n  stroke-width: 1;\n}\nforeignObject > * {\n  margin: 0px;\n}\n.gantt-elastic .p-2 {\n  padding: 10rem;\n}\n.gantt-elastic__main-view-main-container,\n.gantt-elastic__main-view-container {\n  overflow: hidden;\n  max-width: 100%;\n}\n.gantt-elastic__task-list-header-column:last-of-type {\n  border-right: 1px solid #00000050;\n}\n.gantt-elastic__task-list-item:last-of-type {\n  border-bottom: 1px solid #00000050;\n}\n.gantt-elastic__task-list-item-value-wrapper:hover {\n  overflow: visible !important;\n}\n.gantt-elastic__task-list-item-value-wrapper:hover > .gantt-elastic__task-list-item-value-container {\n  position: relative;\n  overflow: visible !important;\n}\n.gantt-elastic__task-list-item-value-wrapper:hover > .gantt-elastic__task-list-item-value {\n  position: absolute;\n}\n", ""]);
+exports.push([module.i, "\n[class^='gantt-elastic'],\n[class*=' gantt-elastic'] {\n  box-sizing: border-box;\n}\n.gantt-elastic__main-view svg {\n  display: block;\n}\n.gantt-elastic__grid-horizontal-line,\n.gantt-elastic__grid-vertical-line {\n  stroke: #a0a0a0;\n  stroke-width: 1;\n}\nforeignObject > * {\n  margin: 0px;\n}\n.gantt-elastic .p-2 {\n  padding: 10rem;\n}\n.gantt-elastic__main-view-main-container,\n.gantt-elastic__main-view-container {\n  overflow: hidden;\n  max-width: 100%;\n}\n.gantt-elastic__task-list-header-column:last-of-type {\n  border-right: 1px solid #00000050;\n}\n.gantt-elastic__task-list-item:last-of-type {\n  border-bottom: 1px solid #00000050;\n}\n.gantt-elastic__task-list-item-value-wrapper:hover {\n  overflow: visible !important;\n}\n.gantt-elastic__task-list-item-value-wrapper:hover > .gantt-elastic__task-list-item-value-container {\n  position: relative;\n  overflow: visible !important;\n}\n.gantt-elastic__task-list-item-value-wrapper:hover > .gantt-elastic__task-list-item-value {\n  position: absolute;\n}\n.gantt-elastic-flex {\n  display: flex;\n  flex-direction: column;\n}\n.gantt-elastic-flex .gantt-elastic__header {\n  width: 100%;\n}\n.gantt-elastic-flex > .gantt-elastic__main-view {\n  flex-grow: 1;\n}\n.gantt-elastic-flex > .gantt-elastic__main-view > .gantt-elastic__main-container-wrapper {\n  height: 100% !important;\n}\n", ""]);
 
 // exports
 
@@ -1187,7 +1187,13 @@ function toComment(sourceMap) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+// ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, "mergeDeep", function() { return /* reexport */ mergeDeep; });
+__webpack_require__.d(__webpack_exports__, "mergeDeepReactive", function() { return /* reexport */ mergeDeepReactive; });
+__webpack_require__.d(__webpack_exports__, "notEqualDeep", function() { return /* reexport */ notEqualDeep; });
 
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/GanttElastic.vue?vue&type=template&id=02c6304c&
 var render = function() {
@@ -1196,7 +1202,13 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "gantt-elastic", staticStyle: { width: "100%" } },
+    {
+      class: {
+        "gantt-elastic": true,
+        "gantt-elastic-flex": this.state.options.isflex
+      },
+      staticStyle: { width: "100%" }
+    },
     [
       _vm._t("header"),
       _vm._v(" "),
@@ -1592,7 +1604,10 @@ var Expandervue_type_template_id_09a21177_render = function() {
                 {},
                 _vm.root.style[_vm.getClassPrefix(false) + "-content"]
               ),
-              attrs: { width: _vm.options.size, height: _vm.options.size },
+              attrs: {
+                width: isNaN(_vm.options.size) ? 0 : _vm.options.size,
+                height: isNaN(_vm.options.size) ? 0 : _vm.options.size
+              },
               on: { click: _vm.toggle }
             },
             [
@@ -1604,10 +1619,14 @@ var Expandervue_type_template_id_09a21177_render = function() {
                   _vm.borderStyle
                 ),
                 attrs: {
-                  x: _vm.border,
-                  y: _vm.border,
-                  width: _vm.options.size - _vm.border * 2,
-                  height: _vm.options.size - _vm.border * 2,
+                  x: isNaN(_vm.border) ? 0 : _vm.border,
+                  y: isNaN(_vm.border) ? 0 : _vm.border,
+                  width: isNaN(_vm.options.size - _vm.border * 2)
+                    ? 0
+                    : _vm.options.size - _vm.border * 2,
+                  height: isNaN(_vm.options.size - _vm.border * 2)
+                    ? 0
+                    : _vm.options.size - _vm.border * 2,
                   rx: "2",
                   ry: "2"
                 }
@@ -1621,10 +1640,14 @@ var Expandervue_type_template_id_09a21177_render = function() {
                       _vm.root.style[_vm.getClassPrefix(false) + "-line"]
                     ),
                     attrs: {
-                      x1: _vm.lineOffset,
-                      y1: _vm.options.size / 2,
-                      x2: _vm.options.size - _vm.lineOffset,
-                      y2: _vm.options.size / 2
+                      x1: isNaN(_vm.lineOffset) ? 0 : _vm.lineOffset,
+                      y1: isNaN(_vm.options.size / 2)
+                        ? 0
+                        : _vm.options.size / 2,
+                      x2: isNaN(_vm.options.size - _vm.lineOffset)
+                        ? 0
+                        : _vm.options.size - _vm.lineOffset,
+                      y2: isNaN(_vm.options.size / 2) ? 0 : _vm.options.size / 2
                     }
                   })
                 : _vm._e(),
@@ -1637,10 +1660,16 @@ var Expandervue_type_template_id_09a21177_render = function() {
                       _vm.root.style[_vm.getClassPrefix(false) + "-line"]
                     ),
                     attrs: {
-                      x1: _vm.options.size / 2,
-                      y1: _vm.lineOffset,
-                      x2: _vm.options.size / 2,
-                      y2: _vm.options.size - _vm.lineOffset
+                      x1: isNaN(_vm.options.size / 2)
+                        ? 0
+                        : _vm.options.size / 2,
+                      y1: isNaN(_vm.lineOffset) ? 0 : _vm.lineOffset,
+                      x2: isNaN(_vm.options.size / 2)
+                        ? 0
+                        : _vm.options.size / 2,
+                      y2: isNaN(_vm.options.size - _vm.lineOffset)
+                        ? 0
+                        : _vm.options.size - _vm.lineOffset
                     }
                   })
                 : _vm._e()
@@ -2642,9 +2671,15 @@ var Chartvue_type_template_id_67c3f5cd_render = function() {
                       attrs: {
                         x: "0",
                         y: "0",
-                        width: _vm.root.state.options.width + "px",
+                        width:
+                          (isNaN(_vm.root.state.options.width)
+                            ? 0
+                            : _vm.root.state.options.width) + "px",
                         height:
-                          _vm.root.state.options.allVisibleTasksHeight + "px",
+                          (isNaN(_vm.root.state.options.allVisibleTasksHeight)
+                            ? 0
+                            : _vm.root.state.options.allVisibleTasksHeight) +
+                          "px",
                         xmlns: "http://www.w3.org/2000/svg"
                       }
                     },
@@ -2710,8 +2745,12 @@ var Gridvue_type_template_id_2bf979a7_render = function() {
       attrs: {
         x: "0",
         y: "0",
-        width: _vm.root.state.options.width,
-        height: _vm.root.state.options.allVisibleTasksHeight,
+        width: isNaN(_vm.root.state.options.width)
+          ? 0
+          : _vm.root.state.options.width,
+        height: isNaN(_vm.root.state.options.allVisibleTasksHeight)
+          ? 0
+          : _vm.root.state.options.allVisibleTasksHeight,
         xmlns: "http://www.w3.org/2000/svg"
       }
     },
@@ -2728,7 +2767,12 @@ var Gridvue_type_template_id_2bf979a7_render = function() {
               key: line.key,
               staticClass: "gantt-elastic__grid-line-horizontal",
               style: Object.assign({}, _vm.root.style["grid-line-horizontal"]),
-              attrs: { x1: line.x1, y1: line.y1, x2: line.x2, y2: line.y2 }
+              attrs: {
+                x1: isNaN(line.x1) ? 0 : line.x1,
+                y1: isNaN(line.y1) ? 0 : line.y1,
+                x2: isNaN(line.x2) ? 0 : line.x2,
+                y2: isNaN(line.y2) ? 0 : line.y2
+              }
             })
           }),
           _vm._v(" "),
@@ -2737,7 +2781,12 @@ var Gridvue_type_template_id_2bf979a7_render = function() {
               key: line.key,
               staticClass: "gantt-elastic__grid-line-vertical",
               style: Object.assign({}, _vm.root.style["grid-line-vertical"]),
-              attrs: { x1: line.x1, y1: line.y1, x2: line.x2, y2: line.y2 }
+              attrs: {
+                x1: isNaN(line.x1) ? 0 : line.x1,
+                y1: isNaN(line.y1) ? 0 : line.y1,
+                x2: isNaN(line.x2) ? 0 : line.x2,
+                y2: isNaN(line.y2) ? 0 : line.y2
+              }
             })
           }),
           _vm._v(" "),
@@ -2745,10 +2794,10 @@ var Gridvue_type_template_id_2bf979a7_render = function() {
             staticClass: "gantt-elastic__grid-line-time",
             style: Object.assign({}, _vm.root.style["grid-line-time"]),
             attrs: {
-              x1: _vm.timeLinePosition.x,
-              y1: _vm.timeLinePosition.y1,
-              x2: _vm.timeLinePosition.x,
-              y2: _vm.timeLinePosition.y2
+              x1: isNaN(_vm.timeLinePosition.x) ? 0 : _vm.timeLinePosition.x,
+              y1: isNaN(_vm.timeLinePosition.y1) ? 0 : _vm.timeLinePosition.y1,
+              x2: isNaN(_vm.timeLinePosition.x) ? 0 : _vm.timeLinePosition.x,
+              y2: isNaN(_vm.timeLinePosition.y2) ? 0 : _vm.timeLinePosition.y2
             }
           })
         ],
@@ -2984,9 +3033,9 @@ var DaysHighlightvue_type_template_id_1bfe64e8_render = function() {
               _vm.root.style["chart-days-highlight-rect"]
             ),
             attrs: {
-              x: day.offset.px,
+              x: isNaN(day.offset.px) ? 0 : day.offset.px,
               y: "0",
-              width: day.width.px,
+              width: isNaN(day.width.px) ? 0 : day.width.px,
               height: "100%"
             }
           })
@@ -3735,7 +3784,10 @@ var DependencyLinesvue_type_template_id_f1cbf6ba_render = function() {
             style: Object.assign(
               {},
               _vm.root.style["chart-dependency-lines-path"],
-              task.style["chart-dependency-lines-path"]
+              task.style["chart-dependency-lines-path"],
+              task.style[
+                "chart-dependency-lines-path-" + dependencyLine.task_id
+              ]
             ),
             attrs: { task: task, d: dependencyLine.points }
           })
@@ -3863,7 +3915,7 @@ DependencyLinesvue_type_template_id_f1cbf6ba_render._withStripped = true
         .filter(task => typeof task.dependentOn !== 'undefined')
         .map(task => {
           task.dependencyLines = task.dependentOn.map(id => {
-            return { points: this.getPoints(id, task.id) };
+            return { points: this.getPoints(id, task.id), task_id: id };
           });
           return task;
         })
@@ -3966,10 +4018,10 @@ var Taskvue_type_template_id_e9c23eca_render = function() {
             _vm.task.style["chart-row-bar"]
           ),
           attrs: {
-            x: _vm.task.x,
-            y: _vm.task.y,
-            width: _vm.task.width,
-            height: _vm.task.height,
+            x: isNaN(_vm.task.x) ? 0 : _vm.task.x,
+            y: isNaN(_vm.task.y) ? 0 : _vm.task.y,
+            width: isNaN(_vm.task.width) ? 0 : _vm.task.width,
+            height: isNaN(_vm.task.height) ? 0 : _vm.task.height,
             viewBox: "0 0 " + _vm.task.width + " " + _vm.task.height,
             xmlns: "http://www.w3.org/2000/svg"
           },
@@ -4063,13 +4115,18 @@ var Textvue_type_template_id_459c2fe4_render = function() {
       staticClass: "gantt-elastic__chart-row-text-wrapper",
       style: Object.assign({}, _vm.root.style["chart-row-text-wrapper"]),
       attrs: {
-        x:
-          _vm.task.x +
-          _vm.task.width +
-          _vm.root.state.options.chart.text.offset,
-        y: _vm.task.y - _vm.root.state.options.chart.grid.horizontal.gap,
-        width: _vm.getWidth,
-        height: _vm.getHeight
+        x: isNaN(
+          _vm.task.x + _vm.task.width + _vm.root.state.options.chart.text.offset
+        )
+          ? 0
+          : _vm.task.x +
+            _vm.task.width +
+            _vm.root.state.options.chart.text.offset,
+        y: isNaN(_vm.task.y - _vm.root.state.options.chart.grid.horizontal.gap)
+          ? 0
+          : _vm.task.y - _vm.root.state.options.chart.grid.horizontal.gap,
+        width: isNaN(_vm.getWidth) ? 0 : _vm.getWidth,
+        height: isNaN(_vm.getHeight) ? 0 : _vm.getHeight
       }
     },
     [
@@ -4301,7 +4358,9 @@ var ProgressBarvue_type_template_id_4bc39355_render = function() {
                 x1: "0",
                 y1: "0",
                 x2: "0",
-                y2: _vm.root.state.options.chart.progress.width
+                y2: isNaN(_vm.root.state.options.chart.progress.width)
+                  ? 0
+                  : _vm.root.state.options.chart.progress.width
               }
             })
           ]
@@ -4316,7 +4375,11 @@ var ProgressBarvue_type_template_id_4bc39355_render = function() {
               _vm.root.style["chart-row-progress-bar-solid"],
               _vm.task.style["chart-row-progress-bar-solid"]
             ),
-            attrs: { x: "0", y: "0", width: _vm.getProgressWidth }
+            attrs: {
+              x: "0",
+              y: "0",
+              width: isNaN(_vm.getProgressWidth) ? 0 : _vm.getProgressWidth
+            }
           })
         : _vm._e(),
       _vm._v(" "),
@@ -4330,9 +4393,11 @@ var ProgressBarvue_type_template_id_4bc39355_render = function() {
                 _vm.task.style["chart-row-progress-bar-pattern"]
               ),
               attrs: {
-                x: _vm.getProgressWidth,
+                x: isNaN(_vm.getProgressWidth) ? 0 : _vm.getProgressWidth,
                 y: "0",
-                width: 100 - _vm.task.progress + "%",
+                width: isNaN(100 - _vm.task.progress + "%")
+                  ? 0
+                  : 100 - _vm.task.progress + "%",
                 height: "100%"
               }
             }),
@@ -4764,10 +4829,10 @@ var Milestonevue_type_template_id_3013006c_render = function() {
             _vm.task.style["chart-row-bar"]
           ),
           attrs: {
-            x: _vm.task.x,
-            y: _vm.task.y,
-            width: _vm.task.width,
-            height: _vm.task.height,
+            x: isNaN(_vm.task.x) ? 0 : _vm.task.x,
+            y: isNaN(_vm.task.y) ? 0 : _vm.task.y,
+            width: isNaN(_vm.task.width) ? 0 : _vm.task.width,
+            height: isNaN(_vm.task.height) ? 0 : _vm.task.height,
             viewBox: "0 0 " + _vm.task.width + " " + _vm.task.height,
             xmlns: "http://www.w3.org/2000/svg"
           },
@@ -5069,10 +5134,10 @@ var Projectvue_type_template_id_077bbd73_render = function() {
             _vm.task.style["chart-row-bar"]
           ),
           attrs: {
-            x: _vm.task.x,
-            y: _vm.task.y,
-            width: _vm.task.width,
-            height: _vm.task.height,
+            x: isNaN(_vm.task.x) ? 0 : _vm.task.x,
+            y: isNaN(_vm.task.y) ? 0 : _vm.task.y,
+            width: isNaN(_vm.task.width) ? 0 : _vm.task.width,
+            height: isNaN(_vm.task.height) ? 0 : _vm.task.height,
             viewBox: "0 0 " + _vm.task.width + " " + _vm.task.height,
             xmlns: "http://www.w3.org/2000/svg"
           },
@@ -6564,6 +6629,7 @@ const GanttElastic = {
         tasks: [],
         options: {
           scrollBarHeight: 0,
+          isflex: false,
           allVisibleTasksHeight: 0,
           outerHeight: 0,
           scroll: {
@@ -7516,7 +7582,8 @@ const GanttElastic = {
         heightCompensation = this.state.options.rowsHeight - this.state.options.maxHeight;
         this.state.options.rowsHeight = this.state.options.maxHeight;
       }
-      this.state.options.height = this.getHeight(maxRows) - heightCompensation;
+      let _height = this.getHeight(maxRows) - heightCompensation;
+      this.state.options.height = _height < 25 ? 25 : _height;
       this.state.options.allVisibleTasksHeight = this.getTasksHeight(visibleTasks);
       this.state.options.outerHeight = this.getHeight(maxRows, true) - heightCompensation;
       let len = visibleTasks.length;
@@ -7697,9 +7764,6 @@ const GanttElastic = {
 var GanttElasticvue_type_style_index_0_lang_css_ = __webpack_require__(5);
 
 // CONCATENATED MODULE: ./src/GanttElastic.vue
-/* concated harmony reexport mergeDeep */__webpack_require__.d(__webpack_exports__, "mergeDeep", function() { return mergeDeep; });
-/* concated harmony reexport mergeDeepReactive */__webpack_require__.d(__webpack_exports__, "mergeDeepReactive", function() { return mergeDeepReactive; });
-/* concated harmony reexport notEqualDeep */__webpack_require__.d(__webpack_exports__, "notEqualDeep", function() { return notEqualDeep; });
 
 
 
@@ -7729,7 +7793,11 @@ GanttElastic_component.options.__file = "src/GanttElastic.vue"
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+// ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, "default", function() { return /* binding */ addStylesClient; });
 
 // CONCATENATED MODULE: ./node_modules/vue-style-loader/lib/listToStyles.js
 /**
@@ -7761,7 +7829,6 @@ function listToStyles (parentId, list) {
 }
 
 // CONCATENATED MODULE: ./node_modules/vue-style-loader/lib/addStylesClient.js
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return addStylesClient; });
 /*
   MIT License http://www.opensource.org/licenses/mit-license.php
   Author Tobias Koppers @sokra

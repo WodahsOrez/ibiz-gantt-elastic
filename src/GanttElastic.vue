@@ -7,7 +7,7 @@
  */
 -->
 <template>
-  <div class="gantt-elastic" style="width:100%">
+  <div :class="{'gantt-elastic': true, 'gantt-elastic-flex': this.state.options.isflex}" style="width:100%">
     <slot name="header"></slot>
     <main-view ref="mainView"></main-view>
     <slot name="footer"></slot>
@@ -464,6 +464,7 @@ const GanttElastic = {
         tasks: [],
         options: {
           scrollBarHeight: 0,
+          isflex: false,
           allVisibleTasksHeight: 0,
           outerHeight: 0,
           scroll: {
@@ -1416,7 +1417,8 @@ const GanttElastic = {
         heightCompensation = this.state.options.rowsHeight - this.state.options.maxHeight;
         this.state.options.rowsHeight = this.state.options.maxHeight;
       }
-      this.state.options.height = this.getHeight(maxRows) - heightCompensation;
+      let _height = this.getHeight(maxRows) - heightCompensation;
+      this.state.options.height = _height < 25 ? 25 : _height;
       this.state.options.allVisibleTasksHeight = this.getTasksHeight(visibleTasks);
       this.state.options.outerHeight = this.getHeight(maxRows, true) - heightCompensation;
       let len = visibleTasks.length;
@@ -1631,5 +1633,18 @@ foreignObject > * {
 }
 .gantt-elastic__task-list-item-value-wrapper:hover > .gantt-elastic__task-list-item-value {
   position: absolute;
+}
+.gantt-elastic-flex {
+  display: flex;
+  flex-direction: column;
+}
+.gantt-elastic-flex .gantt-elastic__header {
+  width: 100%;
+}
+.gantt-elastic-flex > .gantt-elastic__main-view {
+  flex-grow: 1;
+}
+.gantt-elastic-flex > .gantt-elastic__main-view > .gantt-elastic__main-container-wrapper {
+  height: 100% !important;
 }
 </style>
