@@ -84,7 +84,8 @@ export default {
      * @returns {string}
      */
     getLinePoints() {
-      const start = (this.task.width / 100) * this.task.progress;
+      let start = (this.task.width / 100) * this.task.progress;
+      start = isNaN(start) ? 0 : start;
       return `M ${start} 0 L ${start} ${this.task.height}`;
     },
 

@@ -8,7 +8,8 @@
 -->
 <template>
   <div :class="{'gantt-elastic': true, 'gantt-elastic-flex': this.state.options.isflex}" style="width:100%">
-    <slot name="header"></slot>
+    <gantt-elastic-header v-if="state.options.defHeader" :options="options"></gantt-elastic-header>
+    <slot v-else name="header"></slot>
     <main-view ref="mainView"></main-view>
     <slot name="footer"></slot>
   </div>
@@ -18,6 +19,7 @@
 import VueInstance from 'vue';
 import dayjs from 'dayjs';
 import MainView from './components/MainView.vue';
+import ganttElasticHeader from './components/Header.vue';
 import getStyle from './style.js';
 import ResizeObserver from 'resize-observer-polyfill';
 
@@ -446,7 +448,8 @@ export function notEqualDeep(left, right, cache = [], path = '') {
 const GanttElastic = {
   name: 'GanttElastic',
   components: {
-    MainView
+    MainView,
+    ganttElasticHeader
   },
   props: ['tasks', 'options', 'dynamicStyle'],
   provide() {
@@ -467,6 +470,7 @@ const GanttElastic = {
           isflex: false,
           allVisibleTasksHeight: 0,
           outerHeight: 0,
+          defHeader: true,
           scroll: {
             left: 0,
             top: 0
@@ -561,6 +565,9 @@ const GanttElastic = {
         }
         if (typeof task.parent === 'undefined') {
           task.parent = null;
+        }
+        if (typeof task.type === 'undefined') {
+          task.type = 'task';
         }
         if (typeof task.startTime === 'undefined') {
           task.startTime = dayjs(task.start).valueOf();
@@ -1529,6 +1536,12 @@ const GanttElastic = {
 
     this.$root.$emit('gantt-elastic-created', this);
     this.$emit('created', this);
+  },
+
+  watch: {
+    options(newVal) {
+      this.setup();
+    }
   },
 
   /**
