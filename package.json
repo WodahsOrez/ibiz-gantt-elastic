@@ -1,12 +1,14 @@
 {
   "name": "ibiz-gantt-elastic",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Gantt chart. Elastic javascript gantt chart. Vue gantt. Project manager responsive gantt. jquery gantt.",
   "main": "src/GanttElastic.vue",
   "dependencies": {
     "dayjs": "^1.8.16",
     "resize-observer-polyfill": "^1.5.1",
-    "vue": "^2.6.10"
+    "vue": "^2.6.10",
+    "vue-slider-component": "^3.0.40",
+    "vue-switches": "^2.0.1"
   },
   "devDependencies": {
     "@types/chai": "^4.2.2",
@@ -23,8 +25,6 @@
     "eslint": "^5.16.0",
     "eslint-plugin-cypress": "^2.6.1",
     "vue-loader": "^15.7.1",
-    "vue-slider-component": "^3.0.40",
-    "vue-switches": "^2.0.1",
     "vue-template-compiler": "^2.6.10",
     "webpack": "^4.39.3",
     "webpack-cli": "^3.3.8",
