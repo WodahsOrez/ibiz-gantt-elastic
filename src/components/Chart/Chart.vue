@@ -58,6 +58,7 @@
               v-for="task in root.visibleTasks"
               :task="task"
               :key="task.id"
+              @dblclick="clickTaskItem($event, task)"
             >
               <component :task="task" :is="task.type"></component>
             </g>
@@ -112,6 +113,11 @@ export default {
      */
     getViewBox() {
       return `0 0 ${this.root.state.options.width} ${this.root.state.options.allVisibleTasksHeight}`;
+    }
+  },
+  methods: {
+    clickTaskItem($event, task) {
+      this.root.$emit('taskList-item-dblclick', { event: $event, data: task });
     }
   }
 };

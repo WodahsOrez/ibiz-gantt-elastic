@@ -2509,7 +2509,8 @@ var TaskListItemvue_type_template_id_9716293c_render = function() {
     "div",
     {
       staticClass: "gantt-elastic__task-list-item",
-      style: Object.assign({}, _vm.root.style["task-list-item"])
+      style: Object.assign({}, _vm.root.style["task-list-item"]),
+      on: { dblclick: _vm.clickTaskItem }
     },
     _vm._l(_vm.columns, function(column) {
       return !column.hidden
@@ -2861,6 +2862,11 @@ ItemColumn_component.options.__file = "src/components/TaskList/ItemColumn.vue"
     columns() {
       return this.root.state.options.taskList.columns;
     }
+  },
+  methods: {
+    clickTaskItem($event) {
+      this.root.$emit('taskList-item-dblclick', { event: $event, data: this.task });
+    }
   }
 });
 
@@ -3069,7 +3075,12 @@ var Chartvue_type_template_id_67c3f5cd_render = function() {
                               {},
                               _vm.root.style["chart-row-wrapper"]
                             ),
-                            attrs: { task: task }
+                            attrs: { task: task },
+                            on: {
+                              dblclick: function($event) {
+                                return _vm.clickTaskItem($event, task)
+                              }
+                            }
                           },
                           [
                             _c(task.type, {
@@ -5823,6 +5834,7 @@ Project_component.options.__file = "src/components/Chart/Row/Project.vue"
 //
 //
 //
+//
 
 
 
@@ -5867,6 +5879,11 @@ Project_component.options.__file = "src/components/Chart/Row/Project.vue"
      */
     getViewBox() {
       return `0 0 ${this.root.state.options.width} ${this.root.state.options.allVisibleTasksHeight}`;
+    }
+  },
+  methods: {
+    clickTaskItem($event, task) {
+      this.root.$emit('taskList-item-dblclick', { event: $event, data: task });
     }
   }
 });

@@ -189,6 +189,7 @@ const defaultStyle = {
   },
   "header-slider-wrapper": {
     display: "inline-block",
+    "margin-left": "8px",
     "vertical-align": "middle"
   },
   "header-slider--slider": { "box-sizing": "content-box" },

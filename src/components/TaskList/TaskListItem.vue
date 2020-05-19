@@ -7,7 +7,7 @@
  */
 -->
 <template>
-  <div class="gantt-elastic__task-list-item" :style="{ ...root.style['task-list-item'] }">
+  <div class="gantt-elastic__task-list-item" :style="{ ...root.style['task-list-item'] }" @dblclick="clickTaskItem">
     <item-column v-if="!column.hidden" v-for="column in columns" :key="column._id" :column="column" :task="task">
       <task-list-expander
         v-if="column.expander"
@@ -36,6 +36,11 @@ export default {
   computed: {
     columns() {
       return this.root.state.options.taskList.columns;
+    }
+  },
+  methods: {
+    clickTaskItem($event) {
+      this.root.$emit('taskList-item-dblclick', { event: $event, data: this.task });
     }
   }
 };
