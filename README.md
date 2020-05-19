@@ -55,15 +55,14 @@ and if you want default header
     <script src="https://cdn.jsdelivr.net/npm/dayjs"></script>
 
     <script src="https://unpkg.com/gantt-elastic/dist/GanttElastic.umd.js"></script>
-    <script src="https://unpkg.com/gantt-elastic-header/dist/Header.umd.js"></script>
   </head>
 
   <body>
     <div style="width:100%;height:100%">
       <div id="app" v-if="!destroy">
         <gantt-elastic :tasks="tasks" :options="options" :dynamic-style="dynamicStyle">
-          <gantt-header slot="header"></gantt-header>
-          <gantt-footer slot="footer"></gantt-footer>
+          <div slot="header"></div>
+          <div slot="footer"></div>
         </gantt-elastic>
       </div>
     </div>
@@ -106,6 +105,9 @@ and if you want default header
             base: {
               fill: '#1EBC61',
               stroke: '#0EAC51'
+            },
+            text: {
+              color: '#108cee'
             }
             /*'tree-row-bar': {
               fill: '#1EBC61',
@@ -143,12 +145,22 @@ and if you want default header
       let options = {
         maxRows: 100,
         maxHeight: 300,
+        isflex: true,
+        defHeader: false, // has slot header
         title: {
           label: 'Your project title as html (link or whatever...)',
           html: false
         },
         row: {
           height: 24
+        },
+        header: {
+          now: true,
+          xScole: true,
+          yScole: true,
+          taskListWidth: true,
+          expand: true,
+          taskList: true
         },
         calendar: {
           hour: {

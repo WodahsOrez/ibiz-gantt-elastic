@@ -34,12 +34,14 @@
         class="gantt-elastic__header-btn-recenter"
         :style="{ ...style['header-btn-recenter'] }"
         @click.prevent="recenterPosition"
+        v-if="opts.header.now"
       >
         {{ opts.locale.Now }}
       </button>
       <label
         class="gantt-elastic__header-label"
         :style="{ ...style['header-label'] }"
+        v-if="opts.header.xScole"
       >
         {{ opts.locale["X-Scale"] }}
         <div
@@ -62,6 +64,7 @@
       <label
         class="gantt-elastic__header-label"
         :style="{ ...style['header-label'] }"
+        v-if="opts.header.yScole"
       >
         {{ opts.locale["Y-Scale"] }}
         <div
@@ -84,6 +87,7 @@
       <label
         class="gantt-elastic__header-label"
         :style="{ ...style['header-label'] }"
+        v-if="opts.header.expand"
       >
         {{ opts.locale["Before/After"] }}
         <div
@@ -106,6 +110,7 @@
       <label
         class="gantt-elastic__header-label"
         :style="{ ...style['header-label'] }"
+        v-if="opts.header.taskListWidth"
       >
         {{ opts.locale["Task list width"] }}
         <div
@@ -128,6 +133,7 @@
       <label
         class="gantt-elastic__header-task-list-switch--wrapper"
         :style="{ ...style['header-task-list-switch--label'] }"
+        v-if="opts.header.taskList"
       >
         <switches
           class="gantt-elastic__header-task-list-switch"
@@ -205,6 +211,14 @@ const defaultOptions = {
   title: {
     label: "gantt-elastic",
     html: false
+  },
+  header: {
+    now: true,
+    xScole: true,
+    yScole: true,
+    taskListWidth: true,
+    expand: true,
+    taskList: true
   },
   locale: {
     Now: "Now",

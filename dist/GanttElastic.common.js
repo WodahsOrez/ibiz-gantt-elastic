@@ -4521,7 +4521,8 @@ var Textvue_type_template_id_459c2fe4_render = function() {
                         {},
                         _vm.root.style["chart-row-text-content"],
                         _vm.root.style["chart-row-text-content--text"],
-                        _vm.contentStyle
+                        _vm.contentStyle,
+                        _vm.taskTextStyle
                       )
                     },
                     [_c("div", [_vm._v(_vm._s(_vm.task.label))])]
@@ -4536,7 +4537,8 @@ var Textvue_type_template_id_459c2fe4_render = function() {
                       {},
                       _vm.root.style["chart-row-text-content"],
                       _vm.root.style["chart-row-text-content--html"],
-                      _vm.contentStyle
+                      _vm.contentStyle,
+                      _vm.taskTextStyle
                     ),
                     domProps: { innerHTML: _vm._s(_vm.task.label) }
                   })
@@ -4556,6 +4558,8 @@ Textvue_type_template_id_459c2fe4_render._withStripped = true
 // CONCATENATED MODULE: ./src/components/Chart/Text.vue?vue&type=template&id=459c2fe4&
 
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/Text.vue?vue&type=script&lang=js&
+//
+//
 //
 //
 //
@@ -4658,6 +4662,12 @@ Textvue_type_template_id_459c2fe4_render._withStripped = true
         }
       }
       return false;
+    },
+    taskTextStyle() {
+      if (this.task.style) {
+        return this.task.style['text']
+      }
+      return {}
     }
   }
 });
@@ -6266,246 +6276,278 @@ var Headervue_type_template_id_61dd7a3d_render = function() {
           style: Object.assign({}, _vm.style["header-options"])
         },
         [
-          _c(
-            "button",
-            {
-              staticClass: "gantt-elastic__header-btn-recenter",
-              style: Object.assign({}, _vm.style["header-btn-recenter"]),
-              on: {
-                click: function($event) {
-                  $event.preventDefault()
-                  return _vm.recenterPosition($event)
-                }
-              }
-            },
-            [_vm._v("\n      " + _vm._s(_vm.opts.locale.Now) + "\n    ")]
-          ),
-          _vm._v(" "),
-          _c(
-            "label",
-            {
-              staticClass: "gantt-elastic__header-label",
-              style: Object.assign({}, _vm.style["header-label"])
-            },
-            [
-              _vm._v(
-                "\n      " + _vm._s(_vm.opts.locale["X-Scale"]) + "\n      "
-              ),
-              _c(
-                "div",
+          _vm.opts.header.now
+            ? _c(
+                "button",
                 {
-                  staticClass: "gantt-elastic__header-slider-wrapper",
-                  style: Object.assign({}, _vm.style["header-slider-wrapper"])
+                  staticClass: "gantt-elastic__header-btn-recenter",
+                  style: Object.assign({}, _vm.style["header-btn-recenter"]),
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.recenterPosition($event)
+                    }
+                  }
+                },
+                [_vm._v("\n      " + _vm._s(_vm.opts.locale.Now) + "\n    ")]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.opts.header.xScole
+            ? _c(
+                "label",
+                {
+                  staticClass: "gantt-elastic__header-label",
+                  style: Object.assign({}, _vm.style["header-label"])
                 },
                 [
-                  _c("vue-slider", {
-                    staticClass: "gantt-elastic__header-slider",
-                    style: Object.assign({}, _vm.style["header-slider"]),
-                    attrs: {
-                      tooltip: "none",
-                      "process-style": Object.assign(
+                  _vm._v(
+                    "\n      " + _vm._s(_vm.opts.locale["X-Scale"]) + "\n      "
+                  ),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "gantt-elastic__header-slider-wrapper",
+                      style: Object.assign(
                         {},
-                        _vm.style["header-slider--process"]
-                      ),
-                      "slider-style": Object.assign(
-                        {},
-                        _vm.style["header-slider--slider"]
-                      ),
-                      max: 24,
-                      min: 2,
-                      width: "100px"
+                        _vm.style["header-slider-wrapper"]
+                      )
                     },
+                    [
+                      _c("vue-slider", {
+                        staticClass: "gantt-elastic__header-slider",
+                        style: Object.assign({}, _vm.style["header-slider"]),
+                        attrs: {
+                          tooltip: "none",
+                          "process-style": Object.assign(
+                            {},
+                            _vm.style["header-slider--process"]
+                          ),
+                          "slider-style": Object.assign(
+                            {},
+                            _vm.style["header-slider--slider"]
+                          ),
+                          max: 24,
+                          min: 2,
+                          width: "100px"
+                        },
+                        model: {
+                          value: _vm.scale,
+                          callback: function($$v) {
+                            _vm.scale = $$v
+                          },
+                          expression: "scale"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.opts.header.yScole
+            ? _c(
+                "label",
+                {
+                  staticClass: "gantt-elastic__header-label",
+                  style: Object.assign({}, _vm.style["header-label"])
+                },
+                [
+                  _vm._v(
+                    "\n      " + _vm._s(_vm.opts.locale["Y-Scale"]) + "\n      "
+                  ),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "gantt-elastic__header-slider-wrapper",
+                      style: Object.assign(
+                        {},
+                        _vm.style["header-slider-wrapper"]
+                      )
+                    },
+                    [
+                      _c("vue-slider", {
+                        staticClass: "gantt-elastic__header-slider",
+                        style: Object.assign({}, _vm.style["header-slider"]),
+                        attrs: {
+                          tooltip: "none",
+                          "process-style": Object.assign(
+                            {},
+                            _vm.style["header-slider--process"]
+                          ),
+                          "slider-style": Object.assign(
+                            {},
+                            _vm.style["header-slider--slider"]
+                          ),
+                          max: 100,
+                          min: 7,
+                          width: "100px"
+                        },
+                        model: {
+                          value: _vm.height,
+                          callback: function($$v) {
+                            _vm.height = $$v
+                          },
+                          expression: "height"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.opts.header.expand
+            ? _c(
+                "label",
+                {
+                  staticClass: "gantt-elastic__header-label",
+                  style: Object.assign({}, _vm.style["header-label"])
+                },
+                [
+                  _vm._v(
+                    "\n      " +
+                      _vm._s(_vm.opts.locale["Before/After"]) +
+                      "\n      "
+                  ),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "gantt-elastic__header-slider-wrapper",
+                      style: Object.assign(
+                        {},
+                        _vm.style["header-slider-wrapper"]
+                      )
+                    },
+                    [
+                      _c("vue-slider", {
+                        staticClass: "gantt-elastic__header-slider",
+                        style: Object.assign({}, _vm.style["header-slider"]),
+                        attrs: {
+                          tooltip: "none",
+                          "process-style": Object.assign(
+                            {},
+                            _vm.style["header-slider--process"]
+                          ),
+                          "slider-style": Object.assign(
+                            {},
+                            _vm.style["header-slider--slider"]
+                          ),
+                          max: 31,
+                          min: 0,
+                          width: "100px"
+                        },
+                        model: {
+                          value: _vm.scope,
+                          callback: function($$v) {
+                            _vm.scope = $$v
+                          },
+                          expression: "scope"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.opts.header.taskListWidth
+            ? _c(
+                "label",
+                {
+                  staticClass: "gantt-elastic__header-label",
+                  style: Object.assign({}, _vm.style["header-label"])
+                },
+                [
+                  _vm._v(
+                    "\n      " +
+                      _vm._s(_vm.opts.locale["Task list width"]) +
+                      "\n      "
+                  ),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "gantt-elastic__header-slider-wrapper",
+                      style: Object.assign(
+                        {},
+                        _vm.style["header-slider-wrapper"]
+                      )
+                    },
+                    [
+                      _c("vue-slider", {
+                        staticClass: "gantt-elastic__header-slider",
+                        style: Object.assign({}, _vm.style["header-slider"]),
+                        attrs: {
+                          tooltip: "none",
+                          "process-style": Object.assign(
+                            {},
+                            _vm.style["header-slider--process"]
+                          ),
+                          "slider-style": Object.assign(
+                            {},
+                            _vm.style["header-slider--slider"]
+                          ),
+                          max: 100,
+                          min: 0,
+                          width: "100px"
+                        },
+                        model: {
+                          value: _vm.divider,
+                          callback: function($$v) {
+                            _vm.divider = $$v
+                          },
+                          expression: "divider"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.opts.header.taskList
+            ? _c(
+                "label",
+                {
+                  staticClass:
+                    "gantt-elastic__header-task-list-switch--wrapper",
+                  style: Object.assign(
+                    {},
+                    _vm.style["header-task-list-switch--label"]
+                  )
+                },
+                [
+                  _c("switches", {
+                    staticClass: "gantt-elastic__header-task-list-switch",
+                    style: Object.assign(
+                      {},
+                      _vm.style["header-task-list-switch"]
+                    ),
                     model: {
-                      value: _vm.scale,
+                      value: _vm.root.state.options.taskList.display,
                       callback: function($$v) {
-                        _vm.scale = $$v
+                        _vm.$set(
+                          _vm.root.state.options.taskList,
+                          "display",
+                          $$v
+                        )
                       },
-                      expression: "scale"
+                      expression: "root.state.options.taskList.display"
                     }
-                  })
+                  }),
+                  _vm._v(
+                    "\n      " +
+                      _vm._s(_vm.opts.locale["Display task list"]) +
+                      "\n    "
+                  )
                 ],
                 1
               )
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "label",
-            {
-              staticClass: "gantt-elastic__header-label",
-              style: Object.assign({}, _vm.style["header-label"])
-            },
-            [
-              _vm._v(
-                "\n      " + _vm._s(_vm.opts.locale["Y-Scale"]) + "\n      "
-              ),
-              _c(
-                "div",
-                {
-                  staticClass: "gantt-elastic__header-slider-wrapper",
-                  style: Object.assign({}, _vm.style["header-slider-wrapper"])
-                },
-                [
-                  _c("vue-slider", {
-                    staticClass: "gantt-elastic__header-slider",
-                    style: Object.assign({}, _vm.style["header-slider"]),
-                    attrs: {
-                      tooltip: "none",
-                      "process-style": Object.assign(
-                        {},
-                        _vm.style["header-slider--process"]
-                      ),
-                      "slider-style": Object.assign(
-                        {},
-                        _vm.style["header-slider--slider"]
-                      ),
-                      max: 100,
-                      min: 7,
-                      width: "100px"
-                    },
-                    model: {
-                      value: _vm.height,
-                      callback: function($$v) {
-                        _vm.height = $$v
-                      },
-                      expression: "height"
-                    }
-                  })
-                ],
-                1
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "label",
-            {
-              staticClass: "gantt-elastic__header-label",
-              style: Object.assign({}, _vm.style["header-label"])
-            },
-            [
-              _vm._v(
-                "\n      " +
-                  _vm._s(_vm.opts.locale["Before/After"]) +
-                  "\n      "
-              ),
-              _c(
-                "div",
-                {
-                  staticClass: "gantt-elastic__header-slider-wrapper",
-                  style: Object.assign({}, _vm.style["header-slider-wrapper"])
-                },
-                [
-                  _c("vue-slider", {
-                    staticClass: "gantt-elastic__header-slider",
-                    style: Object.assign({}, _vm.style["header-slider"]),
-                    attrs: {
-                      tooltip: "none",
-                      "process-style": Object.assign(
-                        {},
-                        _vm.style["header-slider--process"]
-                      ),
-                      "slider-style": Object.assign(
-                        {},
-                        _vm.style["header-slider--slider"]
-                      ),
-                      max: 31,
-                      min: 0,
-                      width: "100px"
-                    },
-                    model: {
-                      value: _vm.scope,
-                      callback: function($$v) {
-                        _vm.scope = $$v
-                      },
-                      expression: "scope"
-                    }
-                  })
-                ],
-                1
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "label",
-            {
-              staticClass: "gantt-elastic__header-label",
-              style: Object.assign({}, _vm.style["header-label"])
-            },
-            [
-              _vm._v(
-                "\n      " +
-                  _vm._s(_vm.opts.locale["Task list width"]) +
-                  "\n      "
-              ),
-              _c(
-                "div",
-                {
-                  staticClass: "gantt-elastic__header-slider-wrapper",
-                  style: Object.assign({}, _vm.style["header-slider-wrapper"])
-                },
-                [
-                  _c("vue-slider", {
-                    staticClass: "gantt-elastic__header-slider",
-                    style: Object.assign({}, _vm.style["header-slider"]),
-                    attrs: {
-                      tooltip: "none",
-                      "process-style": Object.assign(
-                        {},
-                        _vm.style["header-slider--process"]
-                      ),
-                      "slider-style": Object.assign(
-                        {},
-                        _vm.style["header-slider--slider"]
-                      ),
-                      max: 100,
-                      min: 0,
-                      width: "100px"
-                    },
-                    model: {
-                      value: _vm.divider,
-                      callback: function($$v) {
-                        _vm.divider = $$v
-                      },
-                      expression: "divider"
-                    }
-                  })
-                ],
-                1
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "label",
-            {
-              staticClass: "gantt-elastic__header-task-list-switch--wrapper",
-              style: Object.assign(
-                {},
-                _vm.style["header-task-list-switch--label"]
-              )
-            },
-            [
-              _c("switches", {
-                staticClass: "gantt-elastic__header-task-list-switch",
-                style: Object.assign({}, _vm.style["header-task-list-switch"]),
-                model: {
-                  value: _vm.root.state.options.taskList.display,
-                  callback: function($$v) {
-                    _vm.$set(_vm.root.state.options.taskList, "display", $$v)
-                  },
-                  expression: "root.state.options.taskList.display"
-                }
-              }),
-              _vm._v(
-                "\n      " +
-                  _vm._s(_vm.opts.locale["Display task list"]) +
-                  "\n    "
-              )
-            ],
-            1
-          )
+            : _vm._e()
         ]
       )
     ]
@@ -6829,6 +6871,12 @@ switches_component.options.__file = "node_modules/vue-switches/src/switches.vue"
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -6878,6 +6926,7 @@ const defaultStyle = {
   },
   "header-slider-wrapper": {
     display: "inline-block",
+    "margin-left": "8px",
     "vertical-align": "middle"
   },
   "header-slider--slider": { "box-sizing": "content-box" },
@@ -6893,6 +6942,14 @@ const defaultOptions = {
   title: {
     label: "gantt-elastic",
     html: false
+  },
+  header: {
+    now: true,
+    xScole: true,
+    yScole: true,
+    taskListWidth: true,
+    expand: true,
+    taskList: true
   },
   locale: {
     Now: "Now",

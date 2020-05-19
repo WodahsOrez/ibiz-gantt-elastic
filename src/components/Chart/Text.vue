@@ -26,7 +26,8 @@
           :style="{
             ...root.style['chart-row-text-content'],
             ...root.style['chart-row-text-content--text'],
-            ...contentStyle
+            ...contentStyle,
+            ...taskTextStyle
           }"
           v-if="!html"
         >
@@ -37,7 +38,8 @@
           :style="{
             ...root.style['chart-row-text-content'],
             ...root.style['chart-row-text-content--html'],
-            ...contentStyle
+            ...contentStyle,
+            ...taskTextStyle
           }"
           v-if="html"
           v-html="task.label"
@@ -100,6 +102,12 @@ export default {
         }
       }
       return false;
+    },
+    taskTextStyle() {
+      if (this.task.style) {
+        return this.task.style['text']
+      }
+      return {}
     }
   }
 };
