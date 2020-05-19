@@ -36,11 +36,7 @@ is a vue component but it could be used in other frameworks or even with jQuery 
 
 ### Installation
 
-`npm install --save gantt-elastic` or download zip from github / clone repo
-
-and if you want default header
-
-`npm install --save gantt-elastic-header`
+`npm install --save ibiz-gantt-elastic` or download zip from github / clone repo
 
 ### Usage
 
