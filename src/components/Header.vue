@@ -159,7 +159,8 @@ const defaultStyle = {
     overflow: "hidden",
     clear: "both",
     display: "flex",
-    "justify-content": "space-between"
+    "justify-content": "space-between",
+    "flex-shrink": 0
   },
   "header-title": { float: "left" },
   "header-options": { float: "right" },

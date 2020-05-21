@@ -13,7 +13,7 @@
       :style="{ ...root.style[getClassPrefix(false) + '-content'] }"
       :width="(isNaN(options.size) ? 0 : options.size)"
       :height="(isNaN(options.size) ? 0 : options.size)"
-      v-if="allChildren.length"
+      v-if="(root.state.options.dataType == 'treegrid' && !task.leaf) || allChildren.length"
       @click="toggle"
     >
       <rect
@@ -29,7 +29,7 @@
       <line
         :class="getClassPrefix() + '-line'"
         :style="{ ...root.style[getClassPrefix(false) + '-line'] }"
-        v-if="allChildren.length"
+        v-if="(root.state.options.dataType == 'treegrid' && !task.leaf) || allChildren.length"
         :x1="(isNaN(lineOffset) ? 0 : lineOffset)"
         :y1="(isNaN(options.size / 2) ? 0 : options.size / 2)"
         :x2="(isNaN(options.size - lineOffset) ? 0 : options.size - lineOffset)"
@@ -105,6 +105,12 @@ export default {
         }
       }
       return collapsed === this.tasks.length;
+    },
+    task() {
+      if (this.tasks.length > 0) {
+        return this.tasks[0];
+      }
+      return {};
     }
   },
   methods: {
@@ -127,6 +133,7 @@ export default {
       this.tasks.forEach(task => {
         task.collapsed = collapsed;
       });
+      this.root.$emit('task-item-expand', this.tasks[0]);
     }
   }
 };

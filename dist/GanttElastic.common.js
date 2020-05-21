@@ -1524,7 +1524,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n[class^='gantt-elastic'],\n[class*=' gantt-elastic'] {\n  box-sizing: border-box;\n}\n.gantt-elastic__main-view svg {\n  display: block;\n}\n.gantt-elastic__grid-horizontal-line,\n.gantt-elastic__grid-vertical-line {\n  stroke: #a0a0a0;\n  stroke-width: 1;\n}\nforeignObject > * {\n  margin: 0px;\n}\n.gantt-elastic .p-2 {\n  padding: 10rem;\n}\n.gantt-elastic__main-view-main-container,\n.gantt-elastic__main-view-container {\n  overflow: hidden;\n  max-width: 100%;\n}\n.gantt-elastic__task-list-header-column:last-of-type {\n  border-right: 1px solid #00000050;\n}\n.gantt-elastic__task-list-item:last-of-type {\n  border-bottom: 1px solid #00000050;\n}\n.gantt-elastic__task-list-item-value-wrapper:hover {\n  overflow: visible !important;\n}\n.gantt-elastic__task-list-item-value-wrapper:hover > .gantt-elastic__task-list-item-value-container {\n  position: relative;\n  overflow: visible !important;\n}\n.gantt-elastic__task-list-item-value-wrapper:hover > .gantt-elastic__task-list-item-value {\n  position: absolute;\n}\n.gantt-elastic-flex {\n  display: flex;\n  flex-direction: column;\n}\n.gantt-elastic-flex .gantt-elastic__header {\n  width: 100%;\n}\n.gantt-elastic-flex > .gantt-elastic__main-view {\n  flex-grow: 1;\n}\n.gantt-elastic-flex > .gantt-elastic__main-view > .gantt-elastic__main-container-wrapper {\n  height: 100% !important;\n}\n", ""]);
+exports.push([module.i, "\n[class^='gantt-elastic'],\n[class*=' gantt-elastic'] {\n  box-sizing: border-box;\n}\n.gantt-elastic__main-view svg {\n  display: block;\n}\n.gantt-elastic__grid-horizontal-line,\n.gantt-elastic__grid-vertical-line {\n  stroke: #a0a0a0;\n  stroke-width: 1;\n}\nforeignObject > * {\n  margin: 0px;\n}\n.gantt-elastic .p-2 {\n  padding: 10rem;\n}\n.gantt-elastic__main-view-main-container,\n.gantt-elastic__main-view-container {\n  overflow: hidden;\n  max-width: 100%;\n}\n.gantt-elastic__task-list-header-column:last-of-type {\n  border-right: 1px solid #00000050;\n}\n.gantt-elastic__task-list-item:last-of-type {\n  border-bottom: 1px solid #00000050;\n}\n.gantt-elastic__task-list-item-value-wrapper:hover {\n  overflow: visible !important;\n}\n.gantt-elastic__task-list-item-value-wrapper:hover > .gantt-elastic__task-list-item-value-container {\n  position: relative;\n  overflow: visible !important;\n}\n.gantt-elastic__task-list-item-value-wrapper:hover > .gantt-elastic__task-list-item-value {\n  position: absolute;\n}\n.gantt-elastic-flex {\n  display: flex;\n  flex-direction: column;\n}\n.gantt-elastic-flex .gantt-elastic__header {\n  width: 100%;\n}\n.gantt-elastic-flex > .gantt-elastic__main-view {\n  flex-grow: 1;\n  height: 100%;\n}\n.gantt-elastic-flex > .gantt-elastic__main-view > .gantt-elastic__main-container-wrapper {\n  height: 100% !important;\n}\n", ""]);
 
 // exports
 
@@ -1950,6 +1950,7 @@ var Expandervue_type_template_id_09a21177_render = function() {
       )
     },
     [
+      (_vm.root.state.options.dataType == "treegrid" && !_vm.task.leaf) ||
       _vm.allChildren.length
         ? _c(
             "svg",
@@ -1987,6 +1988,8 @@ var Expandervue_type_template_id_09a21177_render = function() {
                 }
               }),
               _vm._v(" "),
+              (_vm.root.state.options.dataType == "treegrid" &&
+                !_vm.task.leaf) ||
               _vm.allChildren.length
                 ? _c("line", {
                     class: _vm.getClassPrefix() + "-line",
@@ -2148,6 +2151,12 @@ Expandervue_type_template_id_09a21177_render._withStripped = true
         }
       }
       return collapsed === this.tasks.length;
+    },
+    task() {
+      if (this.tasks.length > 0) {
+        return this.tasks[0];
+      }
+      return {};
     }
   },
   methods: {
@@ -2170,6 +2179,7 @@ Expandervue_type_template_id_09a21177_render._withStripped = true
       this.tasks.forEach(task => {
         task.collapsed = collapsed;
       });
+      this.root.$emit('task-item-expand', this.tasks[0]);
     }
   }
 });
@@ -4525,7 +4535,7 @@ var Textvue_type_template_id_459c2fe4_render = function() {
                         _vm.taskTextStyle
                       )
                     },
-                    [_c("div", [_vm._v(_vm._s(_vm.task.label))])]
+                    [_c("div", [_vm._v(_vm._s(_vm.label))])]
                   )
                 : _vm._e(),
               _vm._v(" "),
@@ -4540,7 +4550,7 @@ var Textvue_type_template_id_459c2fe4_render = function() {
                       _vm.contentStyle,
                       _vm.taskTextStyle
                     ),
-                    domProps: { innerHTML: _vm._s(_vm.task.label) }
+                    domProps: { innerHTML: _vm._s(_vm.label) }
                   })
                 : _vm._e()
             ]
@@ -4655,9 +4665,10 @@ Textvue_type_template_id_459c2fe4_render._withStripped = true
      */
     html() {
       const cols = this.root.state.options.taskList.columns;
+      var labelName = this.root.state.options.taskList.labelField;
       for (let i = 0, len = cols.length; i < len; i++) {
         const col = cols[i];
-        if (col.value === 'label' && typeof col.html !== 'undefined' && col.html) {
+        if ((col.value === 'label' || col.value == labelName) && typeof col.html !== 'undefined' && col.html) {
           return true;
         }
       }
@@ -4668,6 +4679,13 @@ Textvue_type_template_id_459c2fe4_render._withStripped = true
         return this.task.style['text']
       }
       return {}
+    },
+    label() {
+      var labelName = this.root.state.options.taskList.labelField;
+      if(labelName) {
+        return this.task[labelName];
+      }
+      return this.task.label;
     }
   }
 });
@@ -6890,7 +6908,8 @@ const defaultStyle = {
     overflow: "hidden",
     clear: "both",
     display: "flex",
-    "justify-content": "space-between"
+    "justify-content": "space-between",
+    "flex-shrink": 0
   },
   "header-title": { float: "left" },
   "header-options": { float: "right" },

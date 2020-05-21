@@ -1656,6 +1656,7 @@ foreignObject > * {
 }
 .gantt-elastic-flex > .gantt-elastic__main-view {
   flex-grow: 1;
+  height: 100%;
 }
 .gantt-elastic-flex > .gantt-elastic__main-view > .gantt-elastic__main-container-wrapper {
   height: 100% !important;

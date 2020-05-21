@@ -31,7 +31,7 @@
           }"
           v-if="!html"
         >
-          <div>{{ task.label }}</div>
+          <div>{{ label }}</div>
         </div>
         <div
           class="gantt-elastic__chart-row-text-content gantt-elastic__chart-row-text-content--html"
@@ -42,7 +42,7 @@
             ...taskTextStyle
           }"
           v-if="html"
-          v-html="task.label"
+          v-html="label"
         ></div>
       </div>
     </foreignObject>
@@ -95,9 +95,10 @@ export default {
      */
     html() {
       const cols = this.root.state.options.taskList.columns;
+      var labelName = this.root.state.options.taskList.labelField;
       for (let i = 0, len = cols.length; i < len; i++) {
         const col = cols[i];
-        if (col.value === 'label' && typeof col.html !== 'undefined' && col.html) {
+        if ((col.value === 'label' || col.value == labelName) && typeof col.html !== 'undefined' && col.html) {
           return true;
         }
       }
@@ -108,6 +109,13 @@ export default {
         return this.task.style['text']
       }
       return {}
+    },
+    label() {
+      var labelName = this.root.state.options.taskList.labelField;
+      if(labelName) {
+        return this.task[labelName];
+      }
+      return this.task.label;
     }
   }
 };
