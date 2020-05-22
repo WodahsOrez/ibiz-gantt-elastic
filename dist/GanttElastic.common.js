@@ -1524,7 +1524,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n[class^='gantt-elastic'],\n[class*=' gantt-elastic'] {\n  box-sizing: border-box;\n}\n.gantt-elastic__main-view svg {\n  display: block;\n}\n.gantt-elastic__grid-horizontal-line,\n.gantt-elastic__grid-vertical-line {\n  stroke: #a0a0a0;\n  stroke-width: 1;\n}\nforeignObject > * {\n  margin: 0px;\n}\n.gantt-elastic .p-2 {\n  padding: 10rem;\n}\n.gantt-elastic__main-view-main-container,\n.gantt-elastic__main-view-container {\n  overflow: hidden;\n  max-width: 100%;\n}\n.gantt-elastic__task-list-header-column:last-of-type {\n  border-right: 1px solid #00000050;\n}\n.gantt-elastic__task-list-item:last-of-type {\n  border-bottom: 1px solid #00000050;\n}\n.gantt-elastic__task-list-item-value-wrapper:hover {\n  overflow: visible !important;\n}\n.gantt-elastic__task-list-item-value-wrapper:hover > .gantt-elastic__task-list-item-value-container {\n  position: relative;\n  overflow: visible !important;\n}\n.gantt-elastic__task-list-item-value-wrapper:hover > .gantt-elastic__task-list-item-value {\n  position: absolute;\n}\n.gantt-elastic-flex {\n  display: flex;\n  flex-direction: column;\n}\n.gantt-elastic-flex .gantt-elastic__header {\n  width: 100%;\n}\n.gantt-elastic-flex > .gantt-elastic__main-view {\n  flex-grow: 1;\n  height: 100%;\n}\n.gantt-elastic-flex > .gantt-elastic__main-view > .gantt-elastic__main-container-wrapper {\n  height: 100% !important;\n}\n", ""]);
+exports.push([module.i, "\n[class^='gantt-elastic'],\n[class*=' gantt-elastic'] {\n  box-sizing: border-box;\n}\n.gantt-elastic__main-view svg {\n  display: block;\n}\n.gantt-elastic__grid-horizontal-line,\n.gantt-elastic__grid-vertical-line {\n  stroke: #a0a0a0;\n  stroke-width: 1;\n}\nforeignObject > * {\n  margin: 0px;\n}\n.gantt-elastic .p-2 {\n  padding: 10rem;\n}\n.gantt-elastic__main-view-main-container,\n.gantt-elastic__main-view-container {\n  overflow: hidden;\n  max-width: 100%;\n}\n.gantt-elastic__task-list-header-column:last-of-type {\n  border-right: 1px solid #00000050;\n}\n.gantt-elastic__task-list-item:last-of-type {\n  border-bottom: 1px solid #00000050;\n}\n.gantt-elastic__task-list-item-value-wrapper:hover {\n  overflow: visible !important;\n}\n.gantt-elastic__task-list-item-value-wrapper:hover > .gantt-elastic__task-list-item-value-container {\n  position: relative;\n  overflow: visible !important;\n}\n.gantt-elastic__task-list-item-value-wrapper:hover > .gantt-elastic__task-list-item-value {\n  position: absolute;\n}\n.gantt-elastic-flex {\n  display: flex;\n  flex-direction: column;\n}\n.gantt-elastic-flex .gantt-elastic__header {\n  width: 100%;\n}\n", ""]);
 
 // exports
 
@@ -1598,9 +1598,7 @@ var MainViewvue_type_template_id_0bc4212e_render = function() {
         "div",
         {
           staticClass: "gantt-elastic__main-container-wrapper",
-          style: Object.assign({}, _vm.root.style["main-container-wrapper"], {
-            height: _vm.root.state.options.height + "px"
-          })
+          style: Object.assign({}, _vm.root.style["main-container-wrapper"])
         },
         [
           _c(
@@ -1609,8 +1607,7 @@ var MainViewvue_type_template_id_0bc4212e_render = function() {
               ref: "mainView",
               staticClass: "gantt-elastic__main-container",
               style: Object.assign({}, _vm.root.style["main-container"], {
-                width: _vm.root.state.options.clientWidth + "px",
-                height: _vm.root.state.options.height + "px"
+                width: _vm.root.state.options.clientWidth + "px"
               })
             },
             [
@@ -1640,8 +1637,7 @@ var MainViewvue_type_template_id_0bc4212e_render = function() {
                         _vm.root.style["task-list-container"],
                         {
                           width:
-                            _vm.root.state.options.taskList.finalWidth + "px",
-                          height: _vm.root.state.options.height + "px"
+                            _vm.root.state.options.taskList.finalWidth + "px"
                         }
                       )
                     },
@@ -1781,17 +1777,21 @@ var TaskListvue_type_template_id_6e11f12f_render = function() {
             {
               ref: "taskListItems",
               staticClass: "gantt-elastic__task-list-items",
-              style: Object.assign({}, _vm.root.style["task-list-items"], {
-                height: _vm.root.state.options.rowsHeight + "px"
-              })
+              style: Object.assign({}, _vm.root.style["task-list-items"])
             },
-            _vm._l(_vm.root.visibleTasks, function(task) {
-              return _c("task-list-item", {
-                key: task.id,
-                attrs: { task: task }
-              })
-            }),
-            1
+            [
+              _c(
+                "div",
+                { style: { height: _vm.root.state.options.rowsHeight + "px" } },
+                _vm._l(_vm.root.visibleTasks, function(task) {
+                  return _c("task-list-item", {
+                    key: task.id,
+                    attrs: { task: task }
+                  })
+                }),
+                1
+              )
+            ]
           )
         ],
         1
@@ -2897,6 +2897,8 @@ if (false) { var TaskListItem_api; }
 TaskListItem_component.options.__file = "src/components/TaskList/TaskListItem.vue"
 /* harmony default export */ var TaskListItem = (TaskListItem_component.exports);
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib??vue-loader-options!./src/components/TaskList/TaskList.vue?vue&type=script&lang=js&
+//
+//
 //
 //
 //
@@ -4682,7 +4684,7 @@ Textvue_type_template_id_459c2fe4_render._withStripped = true
     },
     label() {
       var labelName = this.root.state.options.taskList.labelField;
-      if(labelName) {
+      if (labelName) {
         return this.task[labelName];
       }
       return this.task.label;
@@ -6022,8 +6024,6 @@ Chart_component.options.__file = "src/components/Chart/Chart.vue"
 //
 //
 //
-//
-//
 
 
 
@@ -7146,18 +7146,24 @@ function getStyle(fontSize = '12px', fontFamily = 'Arial, sans-serif') {
     fontSize,
     fontFamily,
     'main-view': {
-      background: '#FFFFFF'
+      background: '#FFFFFF',
+      'flex-grow': 1,
+      height: '100%'
     },
     'main-container-wrapper': {
       overflow: 'hidden',
+      height: '100%',
       'border-top': '1px solid #eee',
       'border-bottom': '1px solid #eee'
     },
     'main-container': {
       float: 'left',
+      height: '100%',
       'max-width': '100%'
     },
-    'main-view-container': {},
+    'main-view-container': {
+      height: '100%'
+    },
     container: {
       display: 'flex',
       'max-width': '100%',
@@ -7208,13 +7214,20 @@ function getStyle(fontSize = '12px', fontFamily = 'Arial, sans-serif') {
     'calendar-row-text--day': {},
     'calendar-row-text--hour': {},
     'task-list-wrapper': {},
-    'task-list': { background: 'transparent', 'border-color': '#eee' },
+    'task-list': { 
+      background: 'transparent', 
+      'border-color': '#eee',
+      display: 'flex',
+      'flex-direction': 'column',
+      height: '100%'
+    },
     'task-list-header': {
       display: 'flex',
       'user-select': 'none',
       'vertical-align': 'middle',
       'border-bottom': '1px solid #eee',
-      'border-left': '1px solid #eee'
+      'border-left': '1px solid #eee',
+      'flex-shrink': 0
     },
     'task-list-header-column': {
       'border-left': '1px solid #00000050',
@@ -7269,7 +7282,9 @@ function getStyle(fontSize = '12px', fontFamily = 'Arial, sans-serif') {
       fill: '#ffffffa0',
       stroke: '#000000A0'
     },
-    'task-list-container': {},
+    'task-list-container': {
+      height: '100%'
+    },
     'task-list-header-label': {
       overflow: 'hidden',
       'text-overflow': 'ellipsis',
@@ -7297,7 +7312,8 @@ function getStyle(fontSize = '12px', fontFamily = 'Arial, sans-serif') {
       margin: '4px 0px'
     },
     'task-list-items': {
-      overflow: 'hidden'
+      overflow: 'hidden',
+      'flex-grow': 1
     },
     'task-list-item': {
       'border-top': '1px solid #eee',
@@ -7354,19 +7370,24 @@ function getStyle(fontSize = '12px', fontFamily = 'Arial, sans-serif') {
     },
     chart: {
       'user-select': 'none',
-      overflow: 'hidden'
+      height: '100%',
+      overflow: 'hidden',
+      display: 'flex',
+      'flex-direction': 'column'
     },
     'chart-calendar-container': {
       'user-select': 'none',
       overflow: 'hidden',
       'max-width': '100%',
-      'border-right': '1px solid #eee'
+      'border-right': '1px solid #eee',
+      'flex-shrink': 0
     },
     'chart-graph-container': {
       'user-select': 'none',
       overflow: 'hidden',
       'max-width': '100%',
-      'border-right': '1px solid #eee'
+      'border-right': '1px solid #eee',
+      'flex-grow': 1
     },
     'chart-area': {},
     'chart-graph': {
@@ -8450,10 +8471,10 @@ const GanttElastic = {
       }
       if (top !== null) {
         this.state.refs.chartScrollContainerVertical.scrollTop = top;
-        this.state.refs.chartGraph.scrollTop = top;
+        this.state.refs.chartGraphContainer.scrollTop = top;
         this.state.refs.taskListItems.scrollTop = top;
         this.state.options.scroll.top = top;
-        this.syncScrollTop();
+        // this.syncScrollTop();
       }
     },
 

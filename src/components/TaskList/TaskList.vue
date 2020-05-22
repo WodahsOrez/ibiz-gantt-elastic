@@ -18,9 +18,11 @@
       <div
         class="gantt-elastic__task-list-items"
         ref="taskListItems"
-        :style="{ ...root.style['task-list-items'], height: root.state.options.rowsHeight + 'px' }"
+        :style="{ ...root.style['task-list-items']}"
       >
-        <task-list-item v-for="task in root.visibleTasks" :key="task.id" :task="task"></task-list-item>
+        <div :style="{ height: root.state.options.rowsHeight + 'px' }">
+          <task-list-item v-for="task in root.visibleTasks" :key="task.id" :task="task"></task-list-item>
+        </div>
       </div>
     </div>
   </div>

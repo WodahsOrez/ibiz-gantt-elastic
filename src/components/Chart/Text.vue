@@ -112,7 +112,7 @@ export default {
     },
     label() {
       var labelName = this.root.state.options.taskList.labelField;
-      if(labelName) {
+      if (labelName) {
         return this.task[labelName];
       }
       return this.task.label;

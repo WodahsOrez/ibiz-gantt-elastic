@@ -10,14 +10,13 @@
   <div class="gantt-elastic__main-view" :style="{ ...root.style['main-view'] }">
     <div
       class="gantt-elastic__main-container-wrapper"
-      :style="{ ...root.style['main-container-wrapper'], height: root.state.options.height + 'px' }"
+      :style="{ ...root.style['main-container-wrapper'] }"
     >
       <div
         class="gantt-elastic__main-container"
         :style="{
           ...root.style['main-container'],
-          width: root.state.options.clientWidth + 'px',
-          height: root.state.options.height + 'px'
+          width: root.state.options.clientWidth + 'px'
         }"
         ref="mainView"
       >
@@ -32,8 +31,7 @@
             class="gantt-elastic__task-list-container"
             :style="{
               ...root.style['task-list-container'],
-              width: root.state.options.taskList.finalWidth + 'px',
-              height: root.state.options.height + 'px'
+              width: root.state.options.taskList.finalWidth + 'px'
             }"
             v-show="root.state.options.taskList.display"
           >

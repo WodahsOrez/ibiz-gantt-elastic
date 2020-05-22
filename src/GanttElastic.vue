@@ -995,10 +995,10 @@ const GanttElastic = {
       }
       if (top !== null) {
         this.state.refs.chartScrollContainerVertical.scrollTop = top;
-        this.state.refs.chartGraph.scrollTop = top;
+        this.state.refs.chartGraphContainer.scrollTop = top;
         this.state.refs.taskListItems.scrollTop = top;
         this.state.options.scroll.top = top;
-        this.syncScrollTop();
+        // this.syncScrollTop();
       }
     },
 
@@ -1653,12 +1653,5 @@ foreignObject > * {
 }
 .gantt-elastic-flex .gantt-elastic__header {
   width: 100%;
-}
-.gantt-elastic-flex > .gantt-elastic__main-view {
-  flex-grow: 1;
-  height: 100%;
-}
-.gantt-elastic-flex > .gantt-elastic__main-view > .gantt-elastic__main-container-wrapper {
-  height: 100% !important;
 }
 </style>

@@ -10,18 +10,24 @@ export default function getStyle(fontSize = '12px', fontFamily = 'Arial, sans-se
     fontSize,
     fontFamily,
     'main-view': {
-      background: '#FFFFFF'
+      background: '#FFFFFF',
+      'flex-grow': 1,
+      height: '100%'
     },
     'main-container-wrapper': {
       overflow: 'hidden',
+      height: '100%',
       'border-top': '1px solid #eee',
       'border-bottom': '1px solid #eee'
     },
     'main-container': {
       float: 'left',
+      height: '100%',
       'max-width': '100%'
     },
-    'main-view-container': {},
+    'main-view-container': {
+      height: '100%'
+    },
     container: {
       display: 'flex',
       'max-width': '100%',
@@ -72,13 +78,20 @@ export default function getStyle(fontSize = '12px', fontFamily = 'Arial, sans-se
     'calendar-row-text--day': {},
     'calendar-row-text--hour': {},
     'task-list-wrapper': {},
-    'task-list': { background: 'transparent', 'border-color': '#eee' },
+    'task-list': { 
+      background: 'transparent', 
+      'border-color': '#eee',
+      display: 'flex',
+      'flex-direction': 'column',
+      height: '100%'
+    },
     'task-list-header': {
       display: 'flex',
       'user-select': 'none',
       'vertical-align': 'middle',
       'border-bottom': '1px solid #eee',
-      'border-left': '1px solid #eee'
+      'border-left': '1px solid #eee',
+      'flex-shrink': 0
     },
     'task-list-header-column': {
       'border-left': '1px solid #00000050',
@@ -133,7 +146,9 @@ export default function getStyle(fontSize = '12px', fontFamily = 'Arial, sans-se
       fill: '#ffffffa0',
       stroke: '#000000A0'
     },
-    'task-list-container': {},
+    'task-list-container': {
+      height: '100%'
+    },
     'task-list-header-label': {
       overflow: 'hidden',
       'text-overflow': 'ellipsis',
@@ -161,7 +176,8 @@ export default function getStyle(fontSize = '12px', fontFamily = 'Arial, sans-se
       margin: '4px 0px'
     },
     'task-list-items': {
-      overflow: 'hidden'
+      overflow: 'hidden',
+      'flex-grow': 1
     },
     'task-list-item': {
       'border-top': '1px solid #eee',
@@ -218,19 +234,24 @@ export default function getStyle(fontSize = '12px', fontFamily = 'Arial, sans-se
     },
     chart: {
       'user-select': 'none',
-      overflow: 'hidden'
+      height: '100%',
+      overflow: 'hidden',
+      display: 'flex',
+      'flex-direction': 'column'
     },
     'chart-calendar-container': {
       'user-select': 'none',
       overflow: 'hidden',
       'max-width': '100%',
-      'border-right': '1px solid #eee'
+      'border-right': '1px solid #eee',
+      'flex-shrink': 0
     },
     'chart-graph-container': {
       'user-select': 'none',
       overflow: 'hidden',
       'max-width': '100%',
-      'border-right': '1px solid #eee'
+      'border-right': '1px solid #eee',
+      'flex-grow': 1
     },
     'chart-area': {},
     'chart-graph': {
