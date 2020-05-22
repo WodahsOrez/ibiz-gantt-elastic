@@ -6099,7 +6099,7 @@ let ignoreScrollEvents = false;
     verticalStyle() {
       return {
         width: this.root.state.options.scrollBarHeight + 'px',
-        height: this.root.state.options.rowsHeight + 'px',
+        height: 'calc(100% - '+ (this.root.state.options.calendar.height + this.root.state.options.calendar.gap) +'px)',
         'margin-top': this.root.state.options.calendar.height + this.root.state.options.calendar.gap + 'px'
       };
     },
@@ -7157,13 +7157,16 @@ function getStyle(fontSize = '12px', fontFamily = 'Arial, sans-serif') {
     'main-view': {
       background: '#FFFFFF',
       'flex-grow': 1,
-      height: '100%'
+      height: '50%',
+      display: 'flex',
+      'flex-direction': 'column'
     },
     'main-container-wrapper': {
       overflow: 'hidden',
-      height: '100%',
+      height: '50%',
       'border-top': '1px solid #eee',
-      'border-bottom': '1px solid #eee'
+      'border-bottom': '1px solid #eee',
+      'flex-grow': 1
     },
     'main-container': {
       float: 'left',

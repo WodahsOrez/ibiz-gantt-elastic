@@ -153,7 +153,7 @@ export default {
     verticalStyle() {
       return {
         width: this.root.state.options.scrollBarHeight + 'px',
-        height: this.root.state.options.rowsHeight + 'px',
+        height: 'calc(100% - '+ (this.root.state.options.calendar.height + this.root.state.options.calendar.gap) +'px)',
         'margin-top': this.root.state.options.calendar.height + this.root.state.options.calendar.gap + 'px'
       };
     },

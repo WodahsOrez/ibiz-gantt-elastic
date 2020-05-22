@@ -12,13 +12,16 @@ export default function getStyle(fontSize = '12px', fontFamily = 'Arial, sans-se
     'main-view': {
       background: '#FFFFFF',
       'flex-grow': 1,
-      height: '100%'
+      height: '50%',
+      display: 'flex',
+      'flex-direction': 'column'
     },
     'main-container-wrapper': {
       overflow: 'hidden',
-      height: '100%',
+      height: '50%',
       'border-top': '1px solid #eee',
-      'border-bottom': '1px solid #eee'
+      'border-bottom': '1px solid #eee',
+      'flex-grow': 1
     },
     'main-container': {
       float: 'left',
