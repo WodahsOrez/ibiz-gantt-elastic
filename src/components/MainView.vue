@@ -205,7 +205,16 @@ export default {
      * Mouse wheel event handler
      */
     chartWheel(ev) {
-      this.root.$emit('chart-wheel', ev);
+      const vertical = this.$refs.chartScrollContainerVertical;
+      if(ev.wheelDelta > 0) {
+        if(vertical.scrollTop - 20 >= 0) {
+          vertical.scrollTop -= 20;
+        } else {
+          vertical.scrollTop = 0;
+        }
+      } else {
+        vertical.scrollTop += 20;
+      }
     },
 
     /**
