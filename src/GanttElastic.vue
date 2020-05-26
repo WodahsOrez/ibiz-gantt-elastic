@@ -715,7 +715,9 @@ const GanttElastic = {
         }
         percentage += column.widthFromPercentage;
         column.finalWidth = (column.thresholdPercent * column.widthFromPercentage) / 100;
-        final += column.finalWidth;
+        if(!column.hidden) {
+          final += column.finalWidth;
+        }
         column.height = this.getTaskHeight() - this.style['grid-line-horizontal']['stroke-width'];
       }
       this.state.options.taskList.widthFromPercentage = percentage;
