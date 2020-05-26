@@ -32,7 +32,7 @@
         :options="root.state.options.taskList.expander"
       ></task-list-expander>
       <div
-        class="gantt-elastic__task-list-header-label"
+        :class="['gantt-elastic__task-list-header-label', column.headerCls]"
         :style="{ ...root.style['task-list-header-label'], ...column.style['task-list-header-label'] }"
         :column="column"
         @mouseup="resizerMouseUp"

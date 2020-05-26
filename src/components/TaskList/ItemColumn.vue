@@ -13,7 +13,7 @@
       <div class="gantt-elastic__task-list-item-value-container" :style="containerStyle">
         <div
           v-if="!html"
-          class="gantt-elastic__task-list-item-value"
+          :class="['gantt-elastic__task-list-item-value', column.cellCls]"
           :style="valueStyle"
           @click="emitEvent('click', $event)"
           @mouseenter="emitEvent('mouseenter', $event)"

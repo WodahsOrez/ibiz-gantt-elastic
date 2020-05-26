@@ -1846,7 +1846,10 @@ var TaskListHeadervue_type_template_id_aefdd7c8_render = function() {
               _c(
                 "div",
                 {
-                  staticClass: "gantt-elastic__task-list-header-label",
+                  class: [
+                    "gantt-elastic__task-list-header-label",
+                    column.headerCls
+                  ],
                   style: Object.assign(
                     {},
                     _vm.root.style["task-list-header-label"],
@@ -2033,6 +2036,11 @@ var Expandervue_type_template_id_09a21177_render = function() {
                 : _vm._e()
             ]
           )
+        : _vm.root.state.options.dataType == "treegrid" && _vm.task.leaf
+        ? _c("div", {
+            class: _vm.getClassPrefix() + "-none-content",
+            staticStyle: { height: "16px", width: "16px" }
+          })
         : _vm._e()
     ]
   )
@@ -2044,6 +2052,10 @@ Expandervue_type_template_id_09a21177_render._withStripped = true
 // CONCATENATED MODULE: ./src/components/Expander.vue?vue&type=template&id=09a21177&
 
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib??vue-loader-options!./src/components/Expander.vue?vue&type=script&lang=js&
+//
+//
+//
+//
 //
 //
 //
@@ -2574,7 +2586,10 @@ var ItemColumnvue_type_template_id_cb5a6c96_render = function() {
                 ? _c(
                     "div",
                     {
-                      staticClass: "gantt-elastic__task-list-item-value",
+                      class: [
+                        "gantt-elastic__task-list-item-value",
+                        _vm.column.cellCls
+                      ],
                       style: _vm.valueStyle,
                       on: {
                         click: function($event) {

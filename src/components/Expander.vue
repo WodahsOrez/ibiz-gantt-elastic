@@ -45,6 +45,10 @@
         :y2="(isNaN(options.size - lineOffset) ? 0 : options.size - lineOffset)"
       ></line>
     </svg>
+    <div v-else-if="root.state.options.dataType == 'treegrid' && task.leaf" 
+        :class="getClassPrefix() + '-none-content'"
+        style="height: 16px; width: 16px;">
+    </div>
   </div>
 </template>
 
