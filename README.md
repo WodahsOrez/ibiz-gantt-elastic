@@ -36,7 +36,7 @@ is a vue component but it could be used in other frameworks or even with jQuery 
 
 ### Installation
 
-`npm install --save ibiz-gantt-elastic` or download zip from github / clone repo
+`npm install --save ibiz-gantt-elastic` or `yarn add ibiz-gantt-elastic`
 
 ### Usage
 
