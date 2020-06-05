@@ -112,10 +112,16 @@ export default {
     },
     label() {
       var labelName = this.root.state.options.taskList.labelField;
+      var label = 'label';
       if (labelName) {
-        return this.task[labelName];
+        label = labelName;
       }
-      return this.task.label;
+      var columns = this.root.state.options.taskList.columns;
+      var col = columns.find(col => Object.is(col.value, label));
+      if (typeof col.render === 'function') {
+        return col.render(this.task);
+      }
+      return this.task[label];
     }
   }
 };

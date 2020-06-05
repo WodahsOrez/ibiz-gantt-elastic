@@ -92,8 +92,8 @@ export default {
      * @returns {any|string}
      */
     value() {
-      if (typeof this.column.value === 'function') {
-        return this.column.value(this.task);
+      if (typeof this.column.render === 'function') {
+        return this.column.render(this.task);
       }
       return this.task[this.column.value];
     },
