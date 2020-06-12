@@ -7972,6 +7972,10 @@ const GanttElastic = {
   },
   data() {
     return {
+      timeZoom: null,
+      rowsHeight: null,
+      scope: null,
+      percent: null,
       state: {
         tasks: [],
         options: {
@@ -8143,6 +8147,19 @@ const GanttElastic = {
         column._id = `${index}-${column.label}`;
         return column;
       });
+      if (this.scope != null) {
+        options.scope.before = this.scope;
+        options.scope.after = this.scope;
+      }
+      if (this.timeZoom != null) {
+        options.times.timeZoom = this.timeZoom;
+      }
+      if (this.rowsHeight != null) {
+        options.row.height = this.rowsHeight;
+      }
+      if (this.percent != null) {
+        options.taskList.percent = this.percent;
+      }
       this.state.options = options;
       tasks = this.fillTasks(tasks);
       this.state.tasksById = this.resetTaskTree(tasks);
@@ -8563,6 +8580,7 @@ const GanttElastic = {
      */
     onTimeZoomChange(timeZoom) {
       this.state.options.times.timeZoom = timeZoom;
+      this.timeZoom = timeZoom;
       this.recalculateTimes();
       this.calculateSteps();
       this.fixScrollPos();
@@ -8573,6 +8591,7 @@ const GanttElastic = {
      */
     onRowHeightChange(height) {
       this.state.options.row.height = height;
+      this.rowsHeight = height;
       this.calculateTaskListColumnsDimensions();
       this.syncScrollTop();
     },
@@ -8583,6 +8602,7 @@ const GanttElastic = {
     onScopeChange(value) {
       this.state.options.scope.before = value;
       this.state.options.scope.after = value;
+      this.scope = value;
       this.initTimes();
       this.calculateSteps();
       this.computeCalendarWidths();
@@ -8594,6 +8614,7 @@ const GanttElastic = {
      */
     onTaskListWidthChange(value) {
       this.state.options.taskList.percent = value;
+      this.percent = value;
       this.calculateTaskListColumnsDimensions();
       this.fixScrollPos();
     },
