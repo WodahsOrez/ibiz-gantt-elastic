@@ -10,12 +10,12 @@
   <svg
     class="gantt-elastic__chart-row-text-wrapper"
     :style="{ ...root.style['chart-row-text-wrapper'] }"
-    :x="(isNaN(task.x + task.width + root.state.options.chart.text.offset) ? 0 : (task.x + task.width + root.state.options.chart.text.offset))"
-    :y="(isNaN(task.y - root.state.options.chart.grid.horizontal.gap) ? 0 : (task.y - root.state.options.chart.grid.horizontal.gap))"
-    :width="(isNaN(getWidth) ? 0 : getWidth)"
-    :height="(isNaN(getHeight) ? 0 : getHeight)"
+    :x="transformNumber(task.x + task.width + root.state.options.chart.text.offset)"
+    :y="transformNumber(task.y - root.state.options.chart.grid.horizontal.gap)"
+    :width="transformNumber(getWidth)"
+    :height="transformNumber(getHeight)"
   >
-    <foreignObject x="0" y="0" width="100%" :height="getHeight">
+    <foreignObject x="0" y="0" width="100%" :height="transformNumber(getHeight)">
       <div
         xmlns="http://www.w3.org/1999/xhtml"
         class="gantt-elastic__chart-row-text"
@@ -122,6 +122,11 @@ export default {
         return col.render(this.task);
       }
       return this.task[label];
+    }
+  },
+  methods: {
+    transformNumber(num) {
+      return isNaN(num) ? 0 : num;
     }
   }
 };

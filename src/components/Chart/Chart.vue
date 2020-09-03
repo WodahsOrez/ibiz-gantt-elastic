@@ -45,8 +45,8 @@
             ref="chartGraphSvg"
             x="0"
             y="0"
-            :width="(isNaN(root.state.options.width) ? 0 : root.state.options.width) + 'px'"
-            :height="(isNaN(root.state.options.allVisibleTasksHeight) ? 0 : root.state.options.allVisibleTasksHeight) + 'px'"
+            :width="transformNumber(root.state.options.width)"
+            :height="transformNumber(root.state.options.allVisibleTasksHeight)"
             xmlns="http://www.w3.org/2000/svg"
           >
             <days-highlight></days-highlight>
@@ -118,6 +118,9 @@ export default {
   methods: {
     clickTaskItem($event, task) {
       this.root.$emit('taskList-item-dblclick', { event: $event, data: task });
+    },
+    transformNumber(num) {
+      return isNaN(num) ? 0 : num;
     }
   }
 };

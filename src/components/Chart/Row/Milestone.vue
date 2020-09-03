@@ -22,8 +22,8 @@
         ...root.style['chart-expander--milestone'],
         ...task.style['chart-expander']
       }"
-      :x="task.x - root.state.options.chart.expander.offset - root.state.options.chart.expander.size"
-      :y="task.y + (root.state.options.row.height - root.state.options.chart.expander.size) / 2"
+      :x="transformNumber(task.x - root.state.options.chart.expander.offset - root.state.options.chart.expander.size)"
+      :y="transformNumber(task.y + (root.state.options.row.height - root.state.options.chart.expander.size) / 2)"
       :width="root.state.options.chart.expander.size"
       :height="root.state.options.chart.expander.size"
       v-if="displayExpander"
@@ -33,10 +33,10 @@
     <svg
       class="gantt-elastic__chart-row-bar gantt-elastic__chart-row-milestone"
       :style="{ ...root.style['chart-row-bar'], ...root.style['chart-row-milestone'], ...task.style['chart-row-bar'] }"
-      :x="(isNaN(task.x) ? 0 : task.x)"
-      :y="(isNaN(task.y) ? 0 : task.y)"
-      :width="(isNaN(task.width) ? 0 : task.width)"
-      :height="(isNaN(task.height) ? 0 : task.height)"
+      :x="transformNumber(task.x)"
+      :y="transformNumber(task.y)"
+      :width="transformNumber(task.width)"
+      :height="transformNumber(task.height)"
       :viewBox="`0 0 ${task.width} ${task.height}`"
       @click="emitEvent('click', $event)"
       @mouseenter="emitEvent('mouseenter', $event)"
@@ -118,6 +118,11 @@ export default {
         ${task.width},${fifty}
         ${task.width - offset},${task.height}
         ${offset},${task.height}`;
+    }
+  },
+  methods: {
+    transformNumber(num) {
+      return isNaN(num) ? 0 : num;
     }
   }
 };

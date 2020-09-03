@@ -25,7 +25,7 @@
           x1="0"
           y1="0"
           x2="0"
-          :y2="(isNaN(root.state.options.chart.progress.width) ? 0 : root.state.options.chart.progress.width)"
+          :y2="transformNumber(root.state.options.chart.progress.width)"
         />
       </pattern>
     </defs>
@@ -35,15 +35,15 @@
       :style="{ ...root.style['chart-row-progress-bar-solid'], ...task.style['chart-row-progress-bar-solid'] }"
       x="0"
       y="0"
-      :width="(isNaN(getProgressWidth) ? 0 : getProgressWidth)"
+      :width="transformNumber(getProgressWidth)"
     ></rect>
     <g v-if="root.state.options.chart.progress.pattern">
       <rect
         class="gantt-elastic__chart-row-progress-bar-pattern"
         :style="{ ...root.style['chart-row-progress-bar-pattern'], ...task.style['chart-row-progress-bar-pattern'] }"
-        :x="(isNaN(getProgressWidth) ? 0 : getProgressWidth)"
+        :x="transformNumber(getProgressWidth)"
         y="0"
-        :width="(isNaN(100 - task.progress + '%') ? 0 : 100 - task.progress + '%')"
+        :width="transformNumber(100 - task.progress + '%')"
         height="100%"
       ></rect>
       <path
@@ -112,6 +112,11 @@ export default {
         },
         this.task.style
       );
+    }
+  },
+  methods: {
+    transformNumber(num) {
+      return isNaN(num) ? 0 : num;
     }
   }
 };
