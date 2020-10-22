@@ -26,8 +26,8 @@ import ResizeObserver from 'resize-observer-polyfill';
 const ctx = document.createElement('canvas').getContext('2d');
 let VueInst = VueInstance;
 function initVue() {
-  if (typeof Vue !== 'undefined' && typeof VueInst === 'undefined') {
-    VueInst = Vue;
+    if (typeof Vue !== 'undefined' && typeof VueInst === 'undefined') {
+        VueInst = Vue;
   }
 }
 initVue();
@@ -466,6 +466,7 @@ const GanttElastic = {
       timeZoom: null,
       rowsHeight: null,
       scope: null,
+      range: null,
       percent: null,
       state: {
         tasks: [],
@@ -478,6 +479,10 @@ const GanttElastic = {
           scroll: {
             left: 0,
             top: 0
+          },
+          range: {
+            start: null,
+            end: null,
           }
         },
         dynamicStyle: {},
@@ -574,10 +579,10 @@ const GanttElastic = {
           task.type = 'task';
         }
         if (typeof task.startTime === 'undefined') {
-          task.startTime = dayjs(task.start).valueOf();
+            task.startTime =task.start ? dayjs(new Date(task.start)).valueOf() : NaN;
         }
         if (typeof task.endTime === 'undefined' && task.hasOwnProperty('end')) {
-          task.endTime = dayjs(task.end).valueOf();
+          task.endTime =task.end ? dayjs(new Date(task.end)).valueOf() : NaN;
         } else if (typeof task.endTime === 'undefined' && task.hasOwnProperty('duration')) {
           task.endTime = task.startTime + task.duration;
         }
@@ -615,6 +620,7 @@ const GanttElastic = {
      * Initialize component
      */
     initialize(itsUpdate = '') {
+        
       let options = mergeDeep({}, this.state.options, getOptions(this.options), this.options);
       let tasks = this.mapTasks(this.tasks, options);
       if (Object.keys(this.state.dynamicStyle).length === 0) {
@@ -641,6 +647,10 @@ const GanttElastic = {
       if (this.scope != null) {
         options.scope.before = this.scope;
         options.scope.after = this.scope;
+      }
+      if (this.range != null) {
+        options.range.start = this.range.start;
+        options.range.end = this.range.end;
       }
       if (this.timeZoom != null) {
         options.times.timeZoom = this.timeZoom;
@@ -1101,6 +1111,20 @@ const GanttElastic = {
     },
 
     /**
+     * Range change event handler
+     */
+    onRangeChange(value) {
+      this.range.start = value[0].valueOf();
+      this.range.end = value[1].valueOf();
+      this.state.options.range.start = value[0].valueOf();
+      this.state.options.range.end = value[1].valueOf();
+      this.initTimes();
+      this.calculateSteps();
+      this.computeCalendarWidths();
+      this.fixScrollPos();
+    },
+
+    /**
      * Task list width change event handler
      */
     onTaskListWidthChange(value) {
@@ -1128,6 +1152,7 @@ const GanttElastic = {
       this.$on('times-timeZoom-change', this.onTimeZoomChange);
       this.$on('row-height-change', this.onRowHeightChange);
       this.$on('scope-change', this.onScopeChange);
+      this.$on('range-change', this.onRangeChange);
       this.$on('taskList-width-change', this.onTaskListWidthChange);
       this.$on('taskList-column-width-change', this.onTaskListColumnWidthChange);
     },
@@ -1169,6 +1194,7 @@ const GanttElastic = {
         .endOf('day')
         .valueOf();
       this.recalculateTimes();
+
     },
 
     /**
@@ -1355,6 +1381,19 @@ const GanttElastic = {
      * Prepare time and date variables for gantt
      */
     prepareDates() {
+      let rangeStart = this.state.options.range.start || new Date("1990/01/01").valueOf();
+      let rangeEnd = this.state.options.range.end || null;
+      // 删除超出范围的数据
+      let tempTasks = [];
+      for (let index = 0, len = this.state.tasks.length; index < len; index++) {
+        let task = this.state.tasks[index];
+        let taskEndTime = task.startTime + task.duration;
+        if( !( (!isNaN(task.startTime) && task.startTime < rangeStart) || (rangeEnd && !isNaN(taskEndTime) && taskEndTime > rangeEnd) ) ){
+          tempTasks.push(task);
+        }
+      }
+      this.state.tasks = tempTasks;
+      // 算出最早和最晚时间
       let firstTaskTime = Number.MAX_SAFE_INTEGER;
       let lastTaskTime = 0;
       for (let index = 0, len = this.state.tasks.length; index < len; index++) {

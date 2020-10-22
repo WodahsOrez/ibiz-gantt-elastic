@@ -150,6 +150,7 @@
 import vueSlider from "vue-slider-component";
 import "vue-slider-component/theme/default.css";
 import Switches from "vue-switches";
+import moment from "moment"
 
 const defaultStyle = {
   header: {
@@ -234,7 +235,7 @@ export default {
   name: "GanttHeader",
   components: {
     vueSlider,
-    Switches
+    Switches,
   },
   props: ["options", "dynamicStyle"],
   inject: ["root"],
@@ -246,6 +247,7 @@ export default {
       localHeight: 0,
       localBefore: 0,
       localPercent: 0,
+      localRange: [],
       sliderOptions: {
         xScale: {
           value: 0
@@ -259,6 +261,7 @@ export default {
     this.localScale = this.root.state.options.times.timeZoom;
     this.localHeight = this.root.state.options.row.height;
     this.localBefore = this.root.state.options.scope.before;
+    this.localRange = [moment(this.root.state.options.range.start),moment(this.root.state.options.range.end)];
     this.localPercent = this.root.state.options.taskList.percent;
     this.sliderOptions.xScale.value = this.root.state.options.times.timeZoom;
     this.style = this.root.mergeDeep({}, defaultStyle, this.dynamicStyle);
@@ -345,6 +348,15 @@ export default {
       set(value) {
         this.localBefore = Number(value);
         this.root.$emit("scope-change", Number(value));
+      }
+    },
+    range: {
+      get() {
+        return this.localRange;
+      },
+      set(value) {
+        this.localRange = value;
+        this.root.$emit("range-change", value);
       }
     },
     divider: {
