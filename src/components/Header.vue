@@ -150,7 +150,7 @@
 import vueSlider from "vue-slider-component";
 import "vue-slider-component/theme/default.css";
 import Switches from "vue-switches";
-import moment from "moment"
+import dayjs from 'dayjs';
 
 const defaultStyle = {
   header: {
@@ -261,7 +261,7 @@ export default {
     this.localScale = this.root.state.options.times.timeZoom;
     this.localHeight = this.root.state.options.row.height;
     this.localBefore = this.root.state.options.scope.before;
-    this.localRange = [moment(this.root.state.options.range.start),moment(this.root.state.options.range.end)];
+    this.localRange = [dayjs(this.root.state.options.range.start),dayjs(this.root.state.options.range.end)];
     this.localPercent = this.root.state.options.taskList.percent;
     this.sliderOptions.xScale.value = this.root.state.options.times.timeZoom;
     this.style = this.root.mergeDeep({}, defaultStyle, this.dynamicStyle);

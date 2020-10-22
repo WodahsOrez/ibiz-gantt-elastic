@@ -1,11 +1,10 @@
 {
   "name": "ibz-gantt-elastic",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Gantt chart. Elastic javascript gantt chart. Vue gantt. Project manager responsive gantt. jquery gantt.",
   "main": "src/GanttElastic.vue",
   "dependencies": {
     "dayjs": "^1.8.16",
-    "moment": "^2.29.1",
     "resize-observer-polyfill": "^1.5.1",
     "vue": "^2.6.10",
     "vue-slider-component": "^3.0.40",
